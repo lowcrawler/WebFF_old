@@ -3,14 +3,14 @@ import { Component }       	from '@angular/core';
 
 @Component ({
 	selector: 
-		'eventMgr',
+		'new-event',
 	templateUrl: 
-		'./app/eventManager.component.html',
+		'./app/newEvent.component.html',
 //	providers: [EventService],
 })
 
 
-export class EventManagerComponent  { //} implements OnInit{
+export class NewEventComponent  { //} implements OnInit{
 //	constructor(private eventService: EventService) {}
 
 //	ngOnInit() {
