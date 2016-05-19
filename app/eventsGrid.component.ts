@@ -47,9 +47,6 @@ private gridOptions: GridOptions;
     }
 	
 	private onViewEditClicked() {
-		let url:string = '/view-edit-event/'+this.selectedEventID;
-		console.log("ViewEditClicked! - attempting to navigate to " + url);
-		
 		this._router.navigate( ['/view-edit-event', this.selectedEventID ] );
 	}	
 	

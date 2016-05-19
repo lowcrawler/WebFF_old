@@ -1,4 +1,4 @@
-import { Component }       	from '@angular/core';
+import { Component, OnInit }       	from '@angular/core';
 import { EventService }		from './event.service';
 import { EventsGridComponent } from './eventsGrid.component';
 
@@ -12,8 +12,16 @@ import { EventsGridComponent } from './eventsGrid.component';
 })
 
 
-export class EventsManagerComponent  { 
+export class EventsManagerComponent implements OnInit  { 
+	constructor(private _eventService:EventService) {}
 	
-
+	//public RAW = "BLAH!!";
+	
+	ngOnInit() {
+		var allEventArray = this._eventService.getEvents();
+		
+		//this.RAW = allEventArray;
+	
+	}
 	
 }

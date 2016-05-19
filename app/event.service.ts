@@ -2,23 +2,23 @@ import { Injectable } from '@angular/core';
 import { EVENTS } from './mock-events';
 
 
-
 @Injectable()
 export class EventService  {
 
 	//private var events;  //TODO implement when instantiation and/or pre-fetch?
 
 
-	getEventList() { // returns all events that pass (do not match) the filter. If filter is null, return all events) 
+	getEvents() { // returns all events that pass (do not match) the filter. If filter is null, return all events) 
 	//TODO define filter (keep expectations in check, don't over engineer)
 	console.log('getEventsList');
-	
+	console.log(EVENTS);
 	//if (events==null) {  
 	//	events = getEvents();
 	//}
 	
-	//var filteredList = 6; //works!
-	var filteredList = EVENTS;
+	//var parsed = JSON.parse(EVENTS.toString());
+	//console.log(parsed);
+	var filteredList = this.getAllEvents();
 	
 	
 	return filteredList;  // returns json array of the events filtered as needed
@@ -26,7 +26,7 @@ export class EventService  {
 	
 	
 	
-	private getEvents() { // returns events for internal use/caching
+	private getAllEvents() { // returns events for internal use/caching
 		//TODO - mock/testing  and  live/DB option
 		return EVENTS;
 	}
