@@ -1,6 +1,6 @@
 import { Component }       	from '@angular/core';
 import { EventService }		from './event.service';
-import { EventGridComponent }		from './eventGrid.component';
+import { EventGridComponent } from './eventGrid.component';
 
 @Component ({
 	selector: 
@@ -12,6 +12,6 @@ import { EventGridComponent }		from './eventGrid.component';
 })
 
 
-export class EventManagerComponent  { //} implements OnInit{
-
+export class EventManagerComponent  { 
+	
 }
