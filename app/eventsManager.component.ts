@@ -14,4 +14,6 @@ import { EventsGridComponent } from './eventsGrid.component';
 
 export class EventsManagerComponent  { 
 	
+
+	
 }

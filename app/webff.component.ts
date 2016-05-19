@@ -15,7 +15,7 @@ import { ViewEditEventComponent } from './viewEditEvent.component';
   {path: '/events-manager',	component: EventsManagerComponent},
   {path: '/new-event',			component: NewEventComponent}, // TODO -- split out into types of new events?
  // {path: '*',				component: WebFieldForm},// TODO, need something for incorrect URLs ... this isn't good.  Technically still works, but console gives errors.
-  {path: '/view-edit-event/:eventid',      component: ViewEditEventComponent}
+  {path: '/view-edit-event/:eventid',       component: ViewEditEventComponent}
 ])
 
 
