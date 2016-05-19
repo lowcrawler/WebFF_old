@@ -20,9 +20,9 @@ export class EventService  {
 	//console.log(parsed);
 	var filteredList = this.getAllEvents();
 	
-	
-	return filteredList;  // returns json array of the events filtered as needed
+	return null;  // returns json array of the events filtered as needed
 	}
+
 	
 	
 	
@@ -34,11 +34,21 @@ export class EventService  {
 	
 	
 	
-	/*
-	getEvent(eventID:number)  { //TODO
-	return singleEvent;
+	
+	getEvent(eventID)  {
+		var allEvents = this.getAllEvents();
+		console.log("AllEvents.length=" + allEvents.length);
+		for(var i=0;i<allEvents.length;i++) {
+			var obj = allEvents[i];
+			if(obj['eventID']==eventID.toString()) {    //todo -- I think I can directly grab this.  Can be tightened up.
+				return obj;
+			}
+		}
+		return null;
 	}
 	
+	
+	/*
 	saveEvent(event:string, overwrite:boolean) { // recieves JSON version of event, saves it (overwriting?)
 	//TODO
 	return null;
