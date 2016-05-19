@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
-import { EventManagerComponent } from './eventManager.component';
+import { EventsManagerComponent } from './eventsManager.component';
 import { NewEventComponent } from './newEvent.component';
 
 @Component({
@@ -11,8 +11,8 @@ import { NewEventComponent } from './newEvent.component';
 
 @Routes([
  // {path: '/', 						component: WebFieldForm}, //TODO - base 'instructions' or welcome screen, perhaps
-  {path: '/event-manager',	component: EventManagerComponent},
-  {path: '/new-event',			component: NewEventComponent},
+  {path: '/events-manager',	component: EventsManagerComponent},
+  {path: '/new-event',			component: NewEventComponent}, // TODO -- split out into types of new events?
  // {path: '*',				component: WebFieldForm},// TODO, need something for incorrect URLs ... this isn't good.  Technically still works, but console gives errors.
   //{path: '/hero/:id',      component: HeroDetailComponent}
 ])

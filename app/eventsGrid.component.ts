@@ -4,14 +4,14 @@ import {GridOptions} from 'ag-grid/main';
 
 @Component ({
 	selector: 
-		'event-grid',
+		'events-grid',
 	templateUrl: 
-		'./app/eventGrid.component.html',
+		'./app/eventsGrid.component.html',
 	directives: [AgGridNg2],
 })
 
 
-export class EventGridComponent  { 
+export class EventsGridComponent  { 
  // todo   Sort numbers correctly without leading zeros
  //todo  tooltip additional informaion, like sediment family, sample medium, original submitted date/time, etc
 
@@ -38,6 +38,22 @@ private gridOptions: GridOptions;
 	private createRowData() {
 	this.rowData = [
         {"eventDefaultDate":"2016-05-18","stationID":"123456","stationName":"Jordan","totalNumContainers":"10"},
+		{"eventDefaultDate":"2015-05-07","stationID":"234234","stationName":"Pideon River at Crossroads","totalNumContainers":"20"},
+		{"eventDefaultDate":"2015-05-01","stationID":"103283","stationName":"Pipestone creek","totalNumContainers":"40"},
+		{"eventDefaultDate":"2016-04-14","stationID":"345344","stationName":"St. Croix","totalNumContainers":"12"},
+		{"eventDefaultDate":"2016-02-12","stationID":"789787","stationName":"Scanlon","totalNumContainers":"8"},
+		{"eventDefaultDate":"2016-01-28","stationID":"098889","stationName":"St. Paul Science Museum","totalNumContainers":"10"},
+		{"eventDefaultDate":"2015-11-11","stationID":"787909","stationName":"Mississippi at Brainerd","totalNumContainers":"4"},
+		{"eventDefaultDate":"2014-03-03","stationID":"980899","stationName":"Harmony crossing","totalNumContainers":"16"},
+		        {"eventDefaultDate":"2016-05-18","stationID":"123456","stationName":"Jordan","totalNumContainers":"10"},
+		{"eventDefaultDate":"2015-05-07","stationID":"234234","stationName":"Pideon River at Crossroads","totalNumContainers":"20"},
+		{"eventDefaultDate":"2015-05-01","stationID":"103283","stationName":"Pipestone creek","totalNumContainers":"40"},
+		{"eventDefaultDate":"2016-04-14","stationID":"345344","stationName":"St. Croix","totalNumContainers":"12"},
+		{"eventDefaultDate":"2016-02-12","stationID":"789787","stationName":"Scanlon","totalNumContainers":"8"},
+		{"eventDefaultDate":"2016-01-28","stationID":"098889","stationName":"St. Paul Science Museum","totalNumContainers":"10"},
+		{"eventDefaultDate":"2015-11-11","stationID":"787909","stationName":"Mississippi at Brainerd","totalNumContainers":"4"},
+		{"eventDefaultDate":"2014-03-03","stationID":"980899","stationName":"Harmony crossing","totalNumContainers":"16"},
+		        {"eventDefaultDate":"2016-05-18","stationID":"123456","stationName":"Jordan","totalNumContainers":"10"},
 		{"eventDefaultDate":"2015-05-07","stationID":"234234","stationName":"Pideon River at Crossroads","totalNumContainers":"20"},
 		{"eventDefaultDate":"2015-05-01","stationID":"103283","stationName":"Pipestone creek","totalNumContainers":"40"},
 		{"eventDefaultDate":"2016-04-14","stationID":"345344","stationName":"St. Croix","totalNumContainers":"12"},
@@ -105,7 +121,7 @@ private calculateRowCount() {
     }
 
     private onRowSelected($event) {
-        console.log('onRowSelected: ' + $event.node.data.name);
+       // console.log('onRowSelected: ' + $event.node.data.name);
 		console.log('ROWS SELECTED: ' );
 		var nodes:any[] = this.gridOptions.api.getSelectedNodes();
 		console.log(nodes);
