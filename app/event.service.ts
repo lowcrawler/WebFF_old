@@ -8,33 +8,35 @@ export class EventService  {
 	//private var events;  //TODO implement when instantiation and/or pre-fetch?
 
 
-	getEvents() { // returns all events that pass (do not match) the filter. If filter is null, return all events) 
+	getEvents() { // returns all events that pass (do not match) the filter. If filter is null, return all events)
 	//TODO define filter (keep expectations in check, don't over engineer)
-	console.log('getEventsList');
-	console.log(EVENTS);
-	//if (events==null) {  
+	console.log('getEvents');
+	console.log(""+EVENTS);
+	//if (events==null) {
 	//	events = getEvents();
 	//}
-	
+
 	//var parsed = JSON.parse(EVENTS.toString());
 	//console.log(parsed);
 	var filteredList = this.getAllEvents();
-	
-	return null;  // returns json array of the events filtered as needed
+
+
+
+	return filteredList;  // returns json array of the events filtered as needed
 	}
 
-	
-	
-	
+
+
+
 	private getAllEvents() { // returns events for internal use/caching
 		//TODO - mock/testing  and  live/DB option
 		return EVENTS;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	getEvent(eventID)  {
 		var allEvents = this.getAllEvents();
 		console.log("AllEvents.length=" + allEvents.length);
@@ -46,14 +48,14 @@ export class EventService  {
 		}
 		return null;
 	}
-	
-	
+
+
 	/*
 	saveEvent(event:string, overwrite:boolean) { // recieves JSON version of event, saves it (overwriting?)
 	//TODO
 	return null;
 	}
-	
+
 	getEventFromXML(XML:string) {
 	//TODO
 	// convert XML to JSON
@@ -61,16 +63,16 @@ export class EventService  {
 	return null;
 	}
 
-	
-  
+
+
 	private singleEvent = {
 		"id": "1",
 		"name": "FirstEventName",
 		"location"}
 
-  
-	private allEvents = 
-	
+
+	private allEvents =
+
 	*/
-  
+
 }

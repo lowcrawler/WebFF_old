@@ -3,7 +3,7 @@ export var EVENTS = [
 			"eventID": "100",
 			"eventDefaultDate": "2016-05-18",
 			"stationID": "123456",
-			"stationName": "Jordan",
+			"stationName": "Jordan MOCK",
 			"totalNumContainers": "10"
 		},
 		{

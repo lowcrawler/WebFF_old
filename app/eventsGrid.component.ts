@@ -4,15 +4,15 @@ import {GridOptions} from 'ag-grid/main';
 import { Router } from '@angular/router';
 
 @Component ({
-	selector: 
+	selector:
 		'events-grid',
-	templateUrl: 
+	templateUrl:
 		'./app/eventsGrid.component.html',
 	directives: [AgGridNg2],
 })
 
 
-export class EventsGridComponent  { 
+export class EventsGridComponent  {
  // todo   Sort numbers correctly without leading zeros
  //todo  tooltip additional informaion, like sediment family, sample medium, original submitted date/time, etc
 
@@ -23,20 +23,20 @@ private gridOptions: GridOptions;
     private rowCount: string;
 	private selectedEventID: number;
 
-	
 
 
 
-	
+
+
 	constructor(private _router: Router) {
-	
+
         // we pass an empty gridOptions in, so we can grab the api out
         this.gridOptions = <GridOptions>{};
 		this.createRowData();
         this.createColumnDefs();
         this.showGrid = true;
     }
-	
+
 
     private onRowClicked($event) {
 	//TODO - deselect if already selected
@@ -45,14 +45,14 @@ private gridOptions: GridOptions;
 		this.selectedEventID = $event.node.data.eventID;
 		console.log('onRowClicked: ' + $event.node.data.eventID);
     }
-	
+
 	private onViewEditClicked() {
 		this._router.navigate( ['/view-edit-event', this.selectedEventID ] );
-	}	
-	
+	}
+
 	private createRowData() {
 	this.rowData = [
-        {"eventID":"100", "eventDefaultDate":"2016-05-18","stationID":"123456","stationName":"Jordan","totalNumContainers":"10"},
+        {"eventID":"100", "eventDefaultDate":"2016-05-18","stationID":"123456","stationName":"Jordanwwwwww","totalNumContainers":"10"},
 		{"eventID":"101","eventDefaultDate":"2015-05-07","stationID":"234234","stationName":"Pideon River at Crossroads","totalNumContainers":"20"},
 		{"eventID":"102","eventDefaultDate":"2015-05-01","stationID":"103283","stationName":"Pipestone creek","totalNumContainers":"40"},
 		{"eventID":"103","eventDefaultDate":"2016-04-14","stationID":"345344","stationName":"St. Croix","totalNumContainers":"12"},
@@ -72,8 +72,8 @@ private gridOptions: GridOptions;
 
 
 	private createColumnDefs() {
-	
-	
+
+
 	this.columnDefs = [
         {headerName: 'Date', field: "eventDefaultDate", width: 200 },
         {headerName: 'Station ID', field: "stationID" ,width:180},
@@ -81,9 +81,9 @@ private gridOptions: GridOptions;
 		{headerName: 'Total # of Containers', field: "totalNumContainers" ,width:160}
     ];
 	}
-	
+
 	//gridOptions
-	
+
 //	temp = this.gridOptions.setRowData(myRowDataToo);
 
 private calculateRowCount() {
@@ -130,7 +130,7 @@ private calculateRowCount() {
 		//console.log('ROW SELECTED: ' );
 		//var nodes:any[] = this.gridOptions.api.getSelectedNodes();
 		//console.log(nodes);
-		
+
 		//for(i=0;)
     }
 
@@ -165,7 +165,7 @@ private calculateRowCount() {
     }
 
 
-	
+
 
     private onQuickFilterChanged($event) {
      //   this.gridOptions.api.setQuickFilter($event.target.value);
