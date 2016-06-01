@@ -44,9 +44,9 @@ export class EventService  {
 
 
 	getEvent(eventID)  { // returns the FIRST object that has a key that matches the eventID
-		this.getAllEvents().then(function(allEvents) {
+		this.getAllEvents().then(function(allEvents:Array<{}>) {
 		  console.log(allEvents); // "Stuff worked!"
-			for(var i=0;i< allEvents.length;i++) {
+			for(var i=0;i<allEvents.length;i++) { 
 				alert("here");
 				var obj = allEvents[i];
 				if(obj['eventID']==eventID.toString()) {    //todo -- I think I can directly grab this.  Can be tightened up.
