@@ -31,12 +31,21 @@ export class EventsGridComponent  {
 
 
 	constructor(private _router: Router, private _eventService:EventService) {
+ //todo, perhaps this promise fullfillment should be moved to the eventManager?
+		this._eventService.getEvents()
+			.then(returnedEvents => {
+				// we pass an empty gridOptions in, so we can grab the api out
+	        	this.gridOptions = <GridOptions>{};
+				//this.createRowData();
+				this.rowData = returnedEvents;
+	        	this.createColumnDefs();
+	        	this.showGrid = true;
+			})
+			.catch(err => {
+				console.log("ERROR: Unable to load events for grid construction: " + err);
+			});
 
-        // we pass an empty gridOptions in, so we can grab the api out
-        this.gridOptions = <GridOptions>{};
-				this.createRowData();
-        this.createColumnDefs();
-        this.showGrid = true;
+
     }
 
 
@@ -50,10 +59,6 @@ export class EventsGridComponent  {
 
 	private onViewEditClicked() {
 		this._router.navigate( ['/view-edit-event', this.selectedEventID ] );
-	}
-
-	private createRowData() {
-		this.rowData = this._eventService.getEvents();
 	}
 
 

@@ -22,10 +22,17 @@ export class EventService  {
 //	return
 
 
-	return filteredList;  // returns json array of the events filtered as needed
-	}
+	//return filteredList;  // returns json array of the events filtered as needed
 
-
+	return this.getAllEvents()
+		.then(function(allEvents:Array<{}>) {
+			return allEvents;
+		})
+		.catch(function(err:Error) {
+				console.error("ERROR FETCHING EVENT" + err);
+				return err;
+		});
+}
 
 
 	private getAllEvents():Promise<Array<Object>> { // returns PROMISE that will resolve to all events for internal use/caching
@@ -54,6 +61,7 @@ export class EventService  {
 			return undefined;
 		}).catch(function(err:Error) {
 				console.error("ERROR FETCHING EVENT" + err);
+				return err;
 			}
 		);
 	}
