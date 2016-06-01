@@ -13,8 +13,8 @@ import { EventService }		from './event.service';
 export class ViewEditEventComponent { //implements OnInit {
 
 public eventID = "";
-public eventData = {};
-
+public eventData = "Loading...";
+public eventPromise : Promise<Object>;
 public testD = ['A','B','C'];
 /*[
 	"eventID": "100",
@@ -28,13 +28,17 @@ public testD = ['A','B','C'];
 
   }
 
+
   ngOnInit() {
 		this.eventID = this.params.getParam('eventid');
-		var returnedEvent = this._eventService.getEvent(this.eventID);
+		this.eventPromise = this._eventService.getEvent(this.eventID);
 		// PROBABLY NEED TO DO ALL THIS IN THE RESOLVING OF THE PROMISE...  LIKELY ASK FOR PROMISE IN INIT AND RESOLVE LATER
-		console.log("ONINIT: " + returnedEvent);
-		this.eventData = JSON.stringify(returnedEvent); // TODO, probably need to have this be a promise or something in case it has to pull from something slow
+		this.eventPromise.then(returnedData => {
+			console.log("RETURNEDDATA: " + returnedData['eventID'] + returnedData['stationName']);
+			console.log(this.eventData);
+			this.eventData = JSON.stringify(returnedData);
+		});
+	}
 
 
-  }
 }
