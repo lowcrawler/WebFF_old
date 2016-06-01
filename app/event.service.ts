@@ -18,7 +18,7 @@ export class EventService  {
 
 	//var parsed = JSON.parse(EVENTS.toString());
 	//console.log(parsed);
-	var filteredList = this.getAllEvents();
+	var filteredList = EVENTS; //this.getAllEvents();
 
 
 
@@ -29,23 +29,34 @@ export class EventService  {
 
 
 	private getAllEvents() { // returns events for internal use/caching
-		//TODO - mock/testing  and  live/DB option
-		return EVENTS;
+		// TODO - caching
+		// TODO - mock/testing  and  live/DB option
+		return new Promise(function(resolve, reject) {
+			//TODO - grab 'EVENTS' async
+			var returnedEvents = EVENTS;
+
+			if (returnedEvents instanceof Array && returnedEvents.length > 0 ) { //TODO, better success test
+				resolve(returnedEvents);
+			}
+			reject(Error("getAllEvents function unable to retrieve events"));
+		});
 	}
 
 
-
-
-
 	getEvent(eventID)  { // returns the FIRST object that has a key that matches the eventID
-		var allEvents = this.getAllEvents();
-		for(var i=0;i<allEvents.length;i++) {
-			var obj = allEvents[i];
-			if(obj['eventID']==eventID.toString()) {    //todo -- I think I can directly grab this.  Can be tightened up.
-				return obj;
+		this.getAllEvents().then(function(allEvents) {
+		  console.log(allEvents); // "Stuff worked!"
+			for(var i=0;i< allEvents.length;i++) {
+				alert("here");
+				var obj = allEvents[i];
+				if(obj['eventID']==eventID.toString()) {    //todo -- I think I can directly grab this.  Can be tightened up.
+					return obj;
+				}
 			}
-		}
-		return null;
+			return null;
+		}, function(err) {
+		  console.log(err); // Error: "It broke"
+		});
 	}
 
 

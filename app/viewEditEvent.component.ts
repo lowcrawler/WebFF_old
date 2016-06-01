@@ -30,8 +30,11 @@ public testD = ['A','B','C'];
 
   ngOnInit() {
 		this.eventID = this.params.getParam('eventid');
+		var returnedEvent = this._eventService.getEvent(this.eventID);
+		// PROBABLY NEED TO DO ALL THIS IN THE RESOLVING OF THE PROMISE...  LIKELY ASK FOR PROMISE IN INIT AND RESOLVE LATER
+		console.log("ONINIT: " + returnedEvent);
+		this.eventData = JSON.stringify(returnedEvent); // TODO, probably need to have this be a promise or something in case it has to pull from something slow
 
-		this.eventData = JSON.stringify(this._eventService.getEvent(this.eventID)); // TODO, probably need to have this be a promise or something in case it has to pull from something slow
 
   }
 }
