@@ -18,16 +18,12 @@ export class EventsGridComponent  {
  // todo   Sort numbers correctly without leading zeros
  //todo  tooltip additional informaion, like sediment family, sample medium, original submitted date/time, etc
 
-		private gridOptions: GridOptions;
+	private gridOptions: GridOptions;
     private showGrid: boolean;
     private rowData: any[];
     private columnDefs: any[];
     private rowCount: string;
-		private selectedEventID: number;
-
-
-
-
+	private selectedEventID: number;
 
 
 	constructor(private _router: Router, private _eventService:EventService) {

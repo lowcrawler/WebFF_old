@@ -1,7 +1,7 @@
 import { Component, OnInit }       	from '@angular/core';
 import {RouteSegment} from '@angular/router';
 import { EventService }		from './event.service';
-
+import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 
 @Component ({
 	templateUrl:
@@ -17,6 +17,7 @@ public eventData = "Loading...";
 public eventPromise : Promise<Object>;
 public testD = ['A','B','C'];
 public testout:string;
+@LocalStorage() public testLSString:string = '';
 /*[
 	"eventID": "100",
 	"eventDefaultDate": "2016-05-18",
@@ -47,6 +48,14 @@ public testout:string;
 		var jason:Object = JSON.parse(txt);
 		console.log("eventID: " + jason['eventID'] + "  eventDate: " + jason['eventDefaultDate']);
 		this.testout = JSON.stringify(jason);
+	}
+
+	onModifyVarClick() {
+		this.testLSString = this.testLSString+"Changed";
+	}
+
+	onModifyLSClick() {
+		localStorage.setItem('/testLSString', "RESET");
 	}
 
 }
