@@ -16,6 +16,7 @@ public eventID = "";
 public eventData = "Loading...";
 public eventPromise : Promise<Object>;
 public testD = ['A','B','C'];
+public testout:string;
 /*[
 	"eventID": "100",
 	"eventDefaultDate": "2016-05-18",
@@ -40,5 +41,12 @@ public testD = ['A','B','C'];
 		});
 	}
 
+	onTestingClick() {
+		console.log("TEST!");
+	 	var txt:string='{ "eventID": "100", "eventDefaultDate": "2016-05-18", "stationID": "123456" }';
+		var jason:Object = JSON.parse(txt);
+		console.log("eventID: " + jason['eventID'] + "  eventDate: " + jason['eventDefaultDate']);
+		this.testout = JSON.stringify(jason);
+	}
 
 }
