@@ -39,7 +39,7 @@ export class EventService  {
 		// TODO - caching
 		// TODO - mock/testing  and  live/DB option
 		return new Promise(function(resolve, reject) {
-			//TODO - grab 'EVENTS' async
+			//TODO - grab 'EVENTS' async ... observables? async pipe?
 			var returnedEvents = EVENTS;
 
 			if (returnedEvents instanceof Array && returnedEvents.length > 0 ) { //todo, better success test

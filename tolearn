@@ -1,0 +1,2 @@
+observables (to help with fetching from server and for sycning back from localstorage)
+pipes/filters (to help ngFor iterating over an object)

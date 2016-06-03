@@ -4,20 +4,28 @@
 Viewing event #{{eventID}}<br>
 RAW Event Data: {{eventData}}<br>
 
-Angular parsing boyee!!<br>
-<li *ngFor="let item of testD">{{item}}</li>
 <br>
+<div style="background-color:GreenYellow">
+Angular parsing: <br>
+testJSON: {{testJSON}} <br>
+<!--li *ngFor="let doc of docs"-->
+<div *ngIf="testJSON!=null">
+	Inside NGIF
+<li *ngFor="let item of keys()">{{item}}</li>
+</div>
+
+
+</div>
+<br><br>
 <div style="background-color:DarkTurquoise ">
-<button (click)="onTestingClick()">Test Stuff</button>
-<br>
-TESTOUTPUT:{{testout}}
-<br>
-<br></div>
-<div style="background-color:Cyan">
-	<button (click)="onModifyVarClick()">Modify Variable</button><button (click)="onModifyLSClick()">Modify LS</button>
+	<button (click)="onTestingClick()">Test Stuff</button><br>
+	TESTOUTPUT:{{testout}}
 	<br>
+	<br>
+</div>
+<div style="background-color:Cyan">
+	<button (click)="onModifyVarClick()">Modify Variable</button><button (click)="onModifyLSClick()">Modify LS</button><br>
 	TESTLSSTRING:{{testLSString}}
-	
 </div>
 <filename>viewEditEvent.component.html</filename>
 

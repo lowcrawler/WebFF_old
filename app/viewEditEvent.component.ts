@@ -15,9 +15,11 @@ export class ViewEditEventComponent { //implements OnInit {
 public eventID = "";
 public eventData = "Loading...";
 public eventPromise : Promise<Object>;
-public testD = ['A','B','C'];
 public testout:string;
+testJSON : Object;
+testArr: Array<any>;
 @LocalStorage() public testLSString:string = '';
+docs:Object;
 /*[
 	"eventID": "100",
 	"eventDefaultDate": "2016-05-18",
@@ -27,9 +29,17 @@ public testout:string;
 }; */
 
  constructor(private params: RouteSegment, private _eventService:EventService){
-
+	 this.testJSON = {
+         id:123,
+         placeId: 31,
+         fb_id: 144423573684
+       };
   }
 
+
+  keys() : Array<string> {  // works, check here for better? http://stackoverflow.com/questions/31490713/iterate-over-typescript-dictionary-in-angular-2
+    return Object.keys(this.testJSON);
+  }
 
   ngOnInit() {
 		this.eventID = this.params.getParam('eventid');
@@ -39,6 +49,7 @@ public testout:string;
 			console.log("RETURNEDDATA: " + returnedData['eventID'] + returnedData['stationName']);
 			console.log(this.eventData);
 			this.eventData = JSON.stringify(returnedData);
+
 		});
 	}
 
