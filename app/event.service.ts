@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class EventService  {
+	// service provides interation between the
 
 	constructor (private _http: Http) {}
 
@@ -14,30 +15,22 @@ export class EventService  {
 
 	//private var events;  //todo implement when instantiation and/or pre-fetch?
 
-	getHTTPEvents() : Observable<Array<any>> {
+	 getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all events in DB in an array of JSON objects
+		 //todo this should be any array of <t>events
 		return this._http.get(this.eventsUrl)
 										.map(this.extractData)
 										.catch(this.handleError);
 	}
 
 
+	public getEvents(key:string,value:string) { // returns all events that pass (do not match) the filter. If filter is null, return all events)
+	console.log('getEvents('+key+','+value+')');
 
-
-	getEvents() { // returns all events that pass (do not match) the filter. If filter is null, return all events)
 	//TODO define filter (keep expectations in check, don't over engineer)
-	console.log('getEvents');
-	console.log(""+EVENTS);
-	//if (events==null) {
-	//	events = getEvents();
-	//}
-
-	//var parsed = JSON.parse(EVENTS.toString());
-	//console.log(parsed);
-	var filteredList = EVENTS; //this.getAllEvents();
-//	return
-
-
-	//return filteredList;  // returns json array of the events filtered as needed
+	//TODO just making sure people know the key value filtering doesn't yet work
+	if(key!=null || value!=null) {
+		console.log("Filtering on getEvents() is not yet enabled");
+	}
 
 	return this.getAllEvents()
 		.then(function(allEvents:Array<{}>) {
