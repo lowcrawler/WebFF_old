@@ -16,13 +16,24 @@ testJSON: {{testJSON}} <br>
 
 
 </div>
+
 <br><br>
-<div style="background-color:DarkTurquoise ">
-	<button (click)="onTestingClick()">Test Stuff</button><br>
-	TESTOUTPUT:{{testout}}
+
+<div style="background-color:Aqua">
+	<button (click)="onTestHTTPClick()">Test HTTP via service</button><br>
+	HTTP Response: {{httpTestEvents}}
 	<br>
 	<br>
 </div>
+
+<br><br>
+
+<div style="background-color:DarkTurquoise">
+	<button (click)="onTestJSONParseStringifyClick()">Test JSON Parse and Stringfy</button><br>
+	TESTOUTPUT:{{testout}}
+	<br>
+	<br>
+</div><br><br>
 <div style="background-color:Cyan">
 	<button (click)="onModifyVarClick()">Modify Variable</button><button (click)="onModifyLSClick()">Modify LS</button><br>
 	TESTLSSTRING:{{testLSString}}

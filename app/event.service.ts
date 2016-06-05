@@ -1,11 +1,26 @@
 import { Injectable } from '@angular/core';
 import { EVENTS } from './mock-events';
-
+import { Http, Response } from '@angular/http';
+import { Observable }     from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class EventService  {
 
-	//private var events;  //TODO implement when instantiation and/or pre-fetch?
+	constructor (private _http: Http) {}
+
+  private eventsUrl = 'app/mock-events.json';  // URL to web API that returns JSON array of events
+
+	//private var events;  //todo implement when instantiation and/or pre-fetch?
+
+	getHTTPEvents() : Observable<Array<any>> {
+		return this._http.get(this.eventsUrl)
+										.map(this.extractData)
+										.catch(this.handleError);
+	}
+
+
 
 
 	getEvents() { // returns all events that pass (do not match) the filter. If filter is null, return all events)
@@ -38,6 +53,8 @@ export class EventService  {
 	private getAllEvents():Promise<Array<Object>> { // returns PROMISE that will resolve to all events for internal use/caching
 		// TODO - caching
 		// TODO - mock/testing  and  live/DB option
+		// TODO - fill out from local storage, then hit the DB and update....
+
 		return new Promise(function(resolve, reject) {
 			//TODO - grab 'EVENTS' async ... observables? async pipe?
 			var returnedEvents = EVENTS;
@@ -80,16 +97,19 @@ export class EventService  {
 	return null;
 	}
 
+*/
 
+	private extractData(res: Response) { // if the response came back in 'data' we would extract that with this.
+		let body = res.json();
+		//return body.data || { };
+		return body || { };
+	}
 
-	private singleEvent = {
-		"id": "1",
-		"name": "FirstEventName",
-		"location"}
-
-
-	private allEvents =
-
-	*/
-
+	private handleError (error: any) {
+		let errMsg = (error.message) ? error.message :
+		error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+		console.error(errMsg); // log to console for now
+		// todo better error logging
+		return Observable.throw(errMsg);
+	}
 }

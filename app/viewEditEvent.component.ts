@@ -20,13 +20,8 @@ testJSON : Object;
 testArr: Array<any>;
 @LocalStorage() public testLSString:string = '';
 docs:Object;
-/*[
-	"eventID": "100",
-	"eventDefaultDate": "2016-05-18",
-	"stationID": "123456",
-	"stationName": "Jordan MOCK",
-	"totalNumContainers": "10"
-}; */
+errorMessage: string;
+httpTestEvents: Array<any>;
 
  constructor(private params: RouteSegment, private _eventService:EventService){
 	 this.testJSON = {
@@ -53,11 +48,23 @@ docs:Object;
 		});
 	}
 
-	onTestingClick() {
-		console.log("TEST!");
+	onTestHTTPClick() {
+		console.log("onTestHTTPClick()");
+	this._eventService.getHTTPEvents()
+									 .subscribe(
+										 httpTestEvents => {
+											 this.httpTestEvents = httpTestEvents;
+											 console.log(httpTestEvents);
+
+										 },
+										 error =>  this.errorMessage = <any>error);
+
+	}
+
+	onTestJSONParseStringifyClick() {
+		console.log("onTestJSONParseStringifyClick()");
 	 	var txt:string='{ "eventID": "100", "eventDefaultDate": "2016-05-18", "stationID": "123456" }';
 		var jason:Object = JSON.parse(txt);
-		console.log("eventID: " + jason['eventID'] + "  eventDate: " + jason['eventDefaultDate']);
 		this.testout = JSON.stringify(jason);
 	}
 
