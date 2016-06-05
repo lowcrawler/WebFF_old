@@ -16,12 +16,13 @@ public eventID = "";
 public eventData = "Loading...";
 public eventPromise : Promise<Object>;
 public testout:string;
+events : Array<any>; //TODO: array of events
 testJSON : Object;
 testArr: Array<any>;
 @LocalStorage() public testLSString:string = '';
 docs:Object;
 errorMessage: string;
-httpTestEvents: Array<any>;
+httpTestEvents: Array<any>;//TODO: array of events
 
  constructor(private params: RouteSegment, private _eventService:EventService){
 	 this.testJSON = {
@@ -38,14 +39,23 @@ httpTestEvents: Array<any>;
 
   ngOnInit() {
 		this.eventID = this.params.getParam('eventid');
-		this.eventPromise = this._eventService.getEvent(this.eventID);
-		// PROBABLY NEED TO DO ALL THIS IN THE RESOLVING OF THE PROMISE...  LIKELY ASK FOR PROMISE IN INIT AND RESOLVE LATER
-		this.eventPromise.then(returnedData => {
-			console.log("RETURNEDDATA: " + returnedData['eventID'] + returnedData['stationName']);
-			console.log(this.eventData);
-			this.eventData = JSON.stringify(returnedData);
+		this._eventService.getEvents(null, null, null)
+										 .subscribe(
+											 events => {
+												 this.events = events;
+											//	 console.log(JSON.stringify(events));
+												 console.log(events[0]);
+											 },
+											 error =>  this.errorMessage = <any>error);
 
-		});
+
+
+		// this.eventPromise.then(returnedData => {
+		// 	console.log("RETURNEDDATA: " + returnedData['eventID'] + returnedData['stationName']);
+		// 	console.log(this.eventData);
+		// 	this.eventData = JSON.stringify(returnedData);
+		//
+		// });
 	}
 
 	onTestHTTPClick() {

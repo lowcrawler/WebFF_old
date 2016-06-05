@@ -11,20 +11,16 @@ export class EventService  {
 
 	constructor (private _http: Http) {}
 
-  private eventsUrl = 'app/mock-events.json';  // URL to web API that returns JSON array of events
 
 	//private var events;  //todo implement when instantiation and/or pre-fetch?
 
-	 getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all events in DB in an array of JSON objects
-		 //todo this should be any array of <t>events
-		return this._http.get(this.eventsUrl)
-										.map(this.extractData)
-										.catch(this.handleError);
-	}
 
 
-	public getEvents(key:string,value:string) { // returns all events that pass (do not match) the filter. If filter is null, return all events)
-	console.log('getEvents('+key+','+value+')');
+	public getEvents(key:string,value:string,matchFilter:boolean) : Observable<Array<any>> {
+		//TOOD Filter interface as parameters
+		// returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
+		// If filter values are null, return all events)
+	console.log('getEvents('+key+','+value+','+matchFilter+')');
 
 	//TODO define filter (keep expectations in check, don't over engineer)
 	//TODO just making sure people know the key value filtering doesn't yet work
@@ -32,49 +28,61 @@ export class EventService  {
 		console.log("Filtering on getEvents() is not yet enabled");
 	}
 
-	return this.getAllEvents()
-		.then(function(allEvents:Array<{}>) {
-			return allEvents;
-		})
-		.catch(function(err:Error) {
-				console.error("ERROR FETCHING EVENT" + err);
-				return err;
-		});
+	// this.getAllEvents()
+	// 								 .subscribe(
+	// 									 events => {
+	// 										 this.events = events;
+	// 									//	 console.log(JSON.stringify(events));
+	// 										 console.log(events[0]);
+	// 									 },
+	// 									 error =>  this.errorMessage = <any>error);
+
+
+	return this.getAllEvents();
 }
 
 
-	private getAllEvents():Promise<Array<Object>> { // returns PROMISE that will resolve to all events for internal use/caching
+	private getAllEvents(): Observable<Array<any>> {  //todo this should be any array of <t>events
 		// TODO - caching
 		// TODO - mock/testing  and  live/DB option
 		// TODO - fill out from local storage, then hit the DB and update....
 
-		return new Promise(function(resolve, reject) {
-			//TODO - grab 'EVENTS' async ... observables? async pipe?
-			var returnedEvents = EVENTS;
+		// TODO - gather up all events in LS and return
 
-			if (returnedEvents instanceof Array && returnedEvents.length > 0 ) { //todo, better success test
-				resolve(returnedEvents);
-			}
-			reject(Error("getAllEvents function unable to retrieve events"));
-		});
+		// get events from DB,
+		//TODO this should be a different observable, not just passed through, of course.
+		return this.getHTTPEvents();
+
+		 // TODO - add events from DB that were not in the LS and update
+
+
+	}
+
+	private eventsUrl = 'app/mock-events.json';  // URL to web API that returns JSON array of events
+	getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
+		 //todo this should be any array of <t>events
+		return this._http.get(this.eventsUrl)
+										.map(this.extractData)
+										.catch(this.handleError);
 	}
 
 
-	getEvent(eventID):Promise<Object>  { // returns the FIRST object that has a key that matches the eventID
-		return this.getAllEvents().then(function(allEvents:Array<{}>) {
-			for(var i=0;i<allEvents.length;i++) {
-				var obj = allEvents[i];
-				if(obj['eventID']==eventID.toString()) {    //todo -- I think I can directly grab this.  Can be tightened up.
-					return obj;
-				}
-			}
-			return undefined;
-		}).catch(function(err:Error) {
-				console.error("ERROR FETCHING EVENT" + err);
-				return err;
-			}
-		);
-	}
+// likely remove entire thing and use filtered above
+	// getEvent(eventID):Promise<Object>  { // returns the FIRST object that has a key that matches the eventID
+	// 	return this.getAllEvents().then(function(allEvents:Array<{}>) {
+	// 		for(var i=0;i<allEvents.length;i++) {
+	// 			var obj = allEvents[i];
+	// 			if(obj['eventID']==eventID.toString()) {    //todo -- I think I can directly grab this.  Can be tightened up.
+	// 				return obj;
+	// 			}
+	// 		}
+	// 		return undefined;
+	// 	}).catch(function(err:Error) {
+	// 			console.error("ERROR FETCHING EVENT" + err);
+	// 			return err;
+	// 		}
+	// 	);
+	// }
 
 
 	/*
@@ -94,8 +102,7 @@ export class EventService  {
 
 	private extractData(res: Response) { // if the response came back in 'data' we would extract that with this.
 		let body = res.json();
-		//return body.data || { };
-		return body || { };
+		return body['events'] || { };
 	}
 
 	private handleError (error: any) {
