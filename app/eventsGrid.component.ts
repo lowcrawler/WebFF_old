@@ -15,7 +15,6 @@ import { EventService }		from './event.service';
 
 
 export class EventsGridComponent implements OnInit  {
- // todo   Sort numbers correctly without leading zeros
  //todo  tooltip additional informaion, like sediment family, sample medium, original submitted date/time, etc
 
 	private gridOptions: GridOptions;
@@ -27,22 +26,19 @@ export class EventsGridComponent implements OnInit  {
 	errorMessage: string; // todo - better error logging
 
 
-	constructor(private _router: Router, private _eventService:EventService) {
- //todo, perhaps this promise fullfillment should be moved to the eventManager?
+	constructor(private _router: Router, private _eventService:EventService) {}
 
-    }
-
-		ngOnInit() {
-			this._eventService.getEvents(null, null, null)
-		  		.subscribe(
-		  			events => {
-						//this.setRowData(events);
-						this.rowData = events;
-						console.log(events);
-		  			},
-		  			error =>
-						this.errorMessage  = <any>error + "ERROR: Unable to load events for grid construction: "
-					);
+	ngOnInit() {
+		this._eventService.getEvents(null, null, null)
+	  		.subscribe(
+	  			events => {
+					//this.setRowData(events);
+					this.rowData = events;
+					console.log(events);
+	  			},
+	  			error =>
+					this.errorMessage  = <any>error + "ERROR: Unable to load events for grid construction: "
+				);
 		this.gridOptions = <GridOptions>{};
 		this.createColumnDefs();
 		this.showGrid = true;
@@ -50,7 +46,7 @@ export class EventsGridComponent implements OnInit  {
 
 
     private onRowClicked($event) {
-	//TODO - deselect if already selected
+	//todo - deselect if already selected
 		var nodes:any[] = this.gridOptions.api.getSelectedNodes();
 		var viewEditAvailable = nodes.length==1 ? true : false;
 		this.selectedEventID = $event.node.data.eventID;
@@ -63,7 +59,7 @@ export class EventsGridComponent implements OnInit  {
 
 
 	private createColumnDefs() {
-//TODO Pull columnDefs from service instead
+//TODO - Pull columnDefs from service instead
 	this.columnDefs = [
         {headerName: 'Date', field: "eventDefaultDate", width: 200 },
         {headerName: 'Station ID', field: "stationID" ,width:180},

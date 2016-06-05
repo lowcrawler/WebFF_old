@@ -37,26 +37,25 @@ httpTestEvents: Array<any>;//TODO: array of events
     return Object.keys(this.testJSON);
   }
 
-  ngOnInit() {
+	ngOnInit() {
 		this.eventID = this.params.getParam('eventid');
 		this._eventService.getEvents(null, null, null)
-										 .subscribe(
-											 events => {
-												 this.events = events;
-											 },
-											 error =>  this.errorMessage = <any>error);
+			.subscribe(
+				events => {
+					this.events = events;
+				},
+				error =>  this.errorMessage = <any>error);
 	}
 
 	onTestHTTPClick() {
 		console.log("onTestHTTPClick()");
-	this._eventService.getHTTPEvents()
-									 .subscribe(
-										 httpTestEvents => {
-											 this.httpTestEvents = httpTestEvents;
-											 console.log(httpTestEvents);
-
-										 },
-										 error =>  this.errorMessage = <any>error);
+		this._eventService.getHTTPEvents()
+			.subscribe(
+				httpTestEvents => {
+							 this.httpTestEvents = httpTestEvents;
+							 console.log(httpTestEvents);
+							 },
+						 	error =>  this.errorMessage = <any>error);
 
 	}
 
