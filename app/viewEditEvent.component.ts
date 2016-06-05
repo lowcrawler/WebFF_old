@@ -43,19 +43,8 @@ httpTestEvents: Array<any>;//TODO: array of events
 										 .subscribe(
 											 events => {
 												 this.events = events;
-											//	 console.log(JSON.stringify(events));
-												 console.log(events[0]);
 											 },
 											 error =>  this.errorMessage = <any>error);
-
-
-
-		// this.eventPromise.then(returnedData => {
-		// 	console.log("RETURNEDDATA: " + returnedData['eventID'] + returnedData['stationName']);
-		// 	console.log(this.eventData);
-		// 	this.eventData = JSON.stringify(returnedData);
-		//
-		// });
 	}
 
 	onTestHTTPClick() {

@@ -28,6 +28,7 @@ export class EventService  {
 		console.log("Filtering on getEvents() is not yet enabled");
 	}
 
+// TODO -- Filter
 	// this.getAllEvents()
 	// 								 .subscribe(
 	// 									 events => {
@@ -62,7 +63,7 @@ export class EventService  {
 	getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
 		 //todo this should be any array of <t>events
 		return this._http.get(this.eventsUrl)
-										.map(this.extractData)
+										.map(response => response.json()['events'])
 										.catch(this.handleError);
 	}
 
@@ -100,10 +101,6 @@ export class EventService  {
 
 */
 
-	private extractData(res: Response) { // if the response came back in 'data' we would extract that with this.
-		let body = res.json();
-		return body['events'] || { };
-	}
 
 	private handleError (error: any) {
 		let errMsg = (error.message) ? error.message :

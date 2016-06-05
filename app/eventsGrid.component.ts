@@ -1,4 +1,4 @@
-import { Component }       	from '@angular/core';
+import { Component, OnInit}       	from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-ng2/main';
 import {GridOptions} from 'ag-grid/main';
 import { Router } from '@angular/router';
@@ -14,35 +14,39 @@ import { EventService }		from './event.service';
 })
 
 
-export class EventsGridComponent  {
+export class EventsGridComponent implements OnInit  {
  // todo   Sort numbers correctly without leading zeros
  //todo  tooltip additional informaion, like sediment family, sample medium, original submitted date/time, etc
 
 	private gridOptions: GridOptions;
     private showGrid: boolean;
-    private rowData: any[];
+    private rowData: any[] = [];
     private columnDefs: any[];
     private rowCount: string;
 	private selectedEventID: number;
+	errorMessage: string; // todo - better error logging
 
 
 	constructor(private _router: Router, private _eventService:EventService) {
  //todo, perhaps this promise fullfillment should be moved to the eventManager?
-		this._eventService.getEvents()
-			.then(returnedEvents => {
-				// we pass an empty gridOptions in, so we can grab the api out
-	        	this.gridOptions = <GridOptions>{};
-				//this.createRowData();
-				this.rowData = returnedEvents;
-	        	this.createColumnDefs();
-	        	this.showGrid = true;
-			})
-			.catch(err => {
-				console.log("ERROR: Unable to load events for grid construction: " + err);
-			});
-
 
     }
+
+		ngOnInit() {
+			this._eventService.getEvents(null, null, null)
+		  		.subscribe(
+		  			events => {
+						//this.setRowData(events);
+						this.rowData = events;
+						console.log(events);
+		  			},
+		  			error =>
+						this.errorMessage  = <any>error + "ERROR: Unable to load events for grid construction: "
+					);
+		this.gridOptions = <GridOptions>{};
+		this.createColumnDefs();
+		this.showGrid = true;
+	}
 
 
     private onRowClicked($event) {
