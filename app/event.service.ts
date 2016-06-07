@@ -4,6 +4,7 @@ import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/share';
 
 @Injectable()
 export class EventService  {
@@ -22,24 +23,42 @@ export class EventService  {
 		// If filter values are null, return all events)
 	console.log('getEvents('+key+','+value+','+matchFilter+')');
 
-	//TODO define filter (keep expectations in check, don't over engineer)
-	//TODO just making sure people know the key value filtering doesn't yet work
-	if(key!=null || value!=null) {
-		console.log("Filtering on getEvents() is not yet enabled");
+	if(matchFilter!=null) {
+		console.log("matchFilter in getEvents in event.service not currently used.");
+		//TODO: build matchFilter into plan
 	}
 
-// TODO -- Filter
-	// this.getAllEvents()
-	// 								 .subscribe(
-	// 									 events => {
-	// 										 this.events = events;
-	// 									//	 console.log(JSON.stringify(events));
-	// 										 console.log(events[0]);
-	// 									 },
-	// 									 error =>  this.errorMessage = <any>error);
+	return this.getAllEvents()
+	 .map(events => {
+		 var matches = events.filter(event => event[key] == value);
+		 if (matches.length == 0) {
+		   throw 'no matching event found';
+		 } else {
+		   return matches[0];
+		 }
+	 })
+	 .catch(e => {
+	   console.log(e);
+	   return e;
+	 });
 
-
-	return this.getAllEvents();
+// 	allEventsObserver.subscribe(
+// 		events => {
+// 			for(var i=0;i<events.length;i++) {
+// 				if(events[i][key]==value) {
+// 					console.log('allEventsObserver.subscribe: MATCH!!!' + events[i][key]);
+// 					var newObs = Observable.create(function (observer) {
+// 						observer.next(events[i]);
+// 						observer.complete(events[i]);
+// 					});
+// 				}
+// 			}
+// 			return allEventsObserver;
+//
+// 		},
+// 		error =>  console.error("Error retriving all events for filtering: " + error));;
+//
+// return allEventsObserver;
 }
 
 

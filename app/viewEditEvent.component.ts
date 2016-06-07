@@ -38,11 +38,13 @@ httpTestEvents: Array<any>;//TODO: array of events
   }
 
 	ngOnInit() {
-		this.eventID = this.params.getParam('eventid');
-		this._eventService.getEvents(null, null, null)
+		this.eventID = this.params.getParam('eventid'); //TODO: need to work off event GUID
+		this._eventService.getEvents('eventID', this.eventID, true)
 			.subscribe(
 				events => {
-					this.events = events;
+					this.events = events; //TODO: check that only one came backe
+					console.log(events);
+					this.eventData = JSON.stringify(events);
 				},
 				error =>  this.errorMessage = <any>error);
 	}
