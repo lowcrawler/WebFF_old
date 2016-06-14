@@ -1,4 +1,4 @@
-import { Component }       	from '@angular/core';
+import { Component, OnInit}       	from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-ng2/main';
 import {GridOptions} from 'ag-grid/main';
 import { Router } from '@angular/router';
@@ -14,34 +14,39 @@ import { EventService }		from './event.service';
 })
 
 
-export class EventsGridComponent  {
- // todo   Sort numbers correctly without leading zeros
+export class EventsGridComponent implements OnInit  {
  //todo  tooltip additional informaion, like sediment family, sample medium, original submitted date/time, etc
 
-		private gridOptions: GridOptions;
+	private gridOptions: GridOptions;
     private showGrid: boolean;
-    private rowData: any[];
+    private rowData: any[] = [];
     private columnDefs: any[];
     private rowCount: string;
-		private selectedEventID: number;
+	private selectedEventID: number;
+	errorMessage: string; // todo - better error logging
 
 
+	constructor(private _router: Router, private _eventService:EventService) {}
 
-
-
-
-	constructor(private _router: Router, private _eventService:EventService) {
-
-        // we pass an empty gridOptions in, so we can grab the api out
-        this.gridOptions = <GridOptions>{};
-				this.createRowData();
-        this.createColumnDefs();
-        this.showGrid = true;
-    }
+	ngOnInit() {
+		this._eventService.getEvents(null, null, null)
+	  		.subscribe(
+	  			events => {
+					//this.setRowData(events);
+					this.rowData = events;
+					console.log(events);
+	  			},
+	  			error =>
+					this.errorMessage  = <any>error + "ERROR: Unable to load events for grid construction: "
+				);
+		this.gridOptions = <GridOptions>{};
+		this.createColumnDefs();
+		this.showGrid = true;
+	}
 
 
     private onRowClicked($event) {
-	//TODO - deselect if already selected
+	//todo - deselect if already selected
 		var nodes:any[] = this.gridOptions.api.getSelectedNodes();
 		var viewEditAvailable = nodes.length==1 ? true : false;
 		this.selectedEventID = $event.node.data.eventID;
@@ -52,13 +57,9 @@ export class EventsGridComponent  {
 		this._router.navigate( ['/view-edit-event', this.selectedEventID ] );
 	}
 
-	private createRowData() {
-		this.rowData = this._eventService.getEvents();
-	}
-
 
 	private createColumnDefs() {
-//TODO Pull columnDefs from service instead
+//TODO - Pull columnDefs from service instead
 	this.columnDefs = [
         {headerName: 'Date', field: "eventDefaultDate", width: 200 },
         {headerName: 'Station ID', field: "stationID" ,width:180},

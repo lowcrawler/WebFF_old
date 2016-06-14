@@ -1,11 +1,73 @@
 <div style="background-color:Cornsilk ">
 <h3>View/Edit Event</h3>
 
-Viewing event #{{eventID}}<br>
-RAW Event Data: {{eventData}}<br>
+Viewing event <b>#{{eventID}}</b><br>
+<br>
+<u>RAW Stringify Returned Event[0] Data:</u> {{eventData}}<br>
+<br>
+<div style="background-color:GreenYellow">
+<u>Angular Traverse:</u> <br>
+<div *ngIf="eventInfo==null">
+	Loading event info...
+</div>
+<div *ngIf="eventInfo!=null"> <!-- only goes 4 layers deep into the JSON ... if we need more, will need to revisit-->
+	<ul>
+<li *ngFor="let L1_key of keys(eventInfo)"><b>{{L1_key}}</b> :
+	<div *ngIf="isDisplayable(eventInfo[L1_key])"> {{eventInfo[L1_key]}}</div>
+	<div *ngIf="!isDisplayable(eventInfo[L1_key])">
+		<ul>
+		<li *ngFor="let L2_key of keys(eventInfo[L1_key])"><b>{{L2_key}}</b> :
+			<div *ngIf="isDisplayable(eventInfo[L1_key][L2_key])">{{eventInfo[L1_key][L2_key]}}</div>
+			<div *ngIf="!isDisplayable(eventInfo[L1_key][L2_key])">
+				<ul>
+				<li *ngFor="let L3_key of keys(eventInfo[L1_key][L2_key])"><b>{{L3_key}}</b> :
+					<div *ngIf="isDisplayable(eventInfo[L1_key][L2_key][L3_key])">{{eventInfo[L1_key][L2_key][L3_key]}}</div>
+					<div *ngIf="!isDisplayable(eventInfo[L1_key][L2_key][L3_key])">
+						<ul>
+						<li *ngFor="let L4_key of keys(eventInfo[L1_key][L2_key][L3_key])"><b>{{L4_key}}</b> :
+							<div *ngIf="isDisplayable(eventInfo[L1_key][L2_key][L3_key][L4_key])">{{eventInfo[L1_key][L2_key][L3_key][L4_key]}}</div>
+							<div *ngIf="!isDisplayable(eventInfo[L1_key][L2_key][L3_key][L4_key])">
 
-Angular parsing boyee!!<br>
-<li *ngFor="let item of testD">{{item}}</li>
+							</div>
+							</ul>
+					</div>
+					</ul>
+			</div>
+			</ul>
+	</div>
+</li>
+</ul>
+</div>
+
+
+
+</div>
+
+<br><br>
+<B>-----TESTING-----</B>
+<div style="background-color:Aqua">
+	<button (click)="onTestHTTPClick()">Test HTTP via service</button><br>
+	HTTP Response: {{httpTestEvents}}
+	<br>
+	<br>
+</div>
+
+<br><br>
+
+<div style="background-color:DarkTurquoise">
+	<button (click)="onTestJSONParseStringifyClick()">Test JSON Parse and Stringfy</button><br>
+	TESTOUTPUT:{{testout}}
+	<br>
+	<br>
+</div><br><br>
+<div style="background-color:Cyan">
+	<button (click)="onModifyVarClick()">Modify Variable</button><button (click)="onModifyLSClick()">Modify LS</button><br>
+	TESTLSSTRING:{{testLSString}}
+</div><br><br>
+<div style="background-color:Purple">
+	<button (click)="onArrayTestClick()">Array Test</button><br>
+	<li *ngFor="let item of testArray">{{item}}</li>
+</div>
 
 <filename>viewEditEvent.component.html</filename>
 

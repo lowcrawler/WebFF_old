@@ -3,11 +3,13 @@ import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
 import { EventsManagerComponent } from './eventsManager.component';
 import { NewEventComponent } from './newEvent.component';
 import { ViewEditEventComponent } from './viewEditEvent.component';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 @Component({
   selector: 'webff',
   templateUrl: './app/webff.component.html',
-  directives: [ROUTER_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES],
+  providers: [HTTP_PROVIDERS]
 })
 
 @Routes([
@@ -19,7 +21,7 @@ import { ViewEditEventComponent } from './viewEditEvent.component';
 ])
 
 
-export class WebFieldForm { 
-	
+export class WebFieldForm {
+
 
 }

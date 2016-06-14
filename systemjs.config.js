@@ -7,22 +7,24 @@
   var map = {
     'app':                        'app', // 'dist',
     '@angular':                   'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
     'ag-grid-ng2': 'node_modules/ag-grid-ng2',
-    'ag-grid': 'node_modules/ag-grid'
+    'ag-grid': 'node_modules/ag-grid',
+	'angular2-localstorage': 'node_modules/angular2-localstorage'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { defaultExtension: 'js' },
     'ag-grid-ng2': {
             defaultExtension: "js"
         },
-        'ag-grid': {
+    'ag-grid': {
             defaultExtension: "js"
-        }
+        },
+	'angular2-localstorage': {
+		defaultExtension: "js"
+	}
   };
   var ngPackageNames = [
     'common',
