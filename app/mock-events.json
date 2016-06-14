@@ -16,9 +16,17 @@
 		"eventDefaultDate": "2015-05-01",
 		"stationID": "103283",
 		"stationName": "Pipestone creek",
-		"totalNumContainers": 40
+		"totalNumContainers": 40,
+		"furtherInfo": {
+			"waterTemp":9,
+			"airTemp":23,
+			"deeperFlowInfo":{
+				"fastFlow":"yes",
+				"powerFlow":"Heck yes"
+			}
+		}
 	}, {
-		"eventID": "103",
+		"eventID": "104",
 		"eventDefaultDate": "2016-04-14",
 		"stationID": "345344",
 		"stationName": "St. Croix",
