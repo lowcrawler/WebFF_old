@@ -16,15 +16,20 @@
 		"eventDefaultDate": "2015-05-01",
 		"stationID": "103283",
 		"stationName": "Pipestone creek",
-		"totalNumContainers": 40,
 		"furtherInfo": {
 			"waterTemp":9,
 			"airTemp":23,
 			"deeperFlowInfo":{
 				"fastFlow":"yes",
-				"powerFlow":"Heck yes"
+				"powerFlow":"Heck yes",
+				"inception":{
+					"alwaysOn":5,
+					"thisisabool":true
+				}
 			}
-		}
+		},
+		"totalNumContainers": 40
+
 	}, {
 		"eventID": "104",
 		"eventDefaultDate": "2016-04-14",

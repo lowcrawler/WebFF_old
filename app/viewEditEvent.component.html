@@ -10,7 +10,7 @@ Viewing event <b>#{{eventID}}</b><br>
 <div *ngIf="eventInfo==null">
 	Loading event info...
 </div>
-<div *ngIf="eventInfo!=null">
+<div *ngIf="eventInfo!=null"> <!-- only goes 4 layers deep into the JSON ... if we need more, will need to revisit-->
 	<ul>
 <li *ngFor="let L1_key of keys(eventInfo)"><b>{{L1_key}}</b> :
 	<div *ngIf="isDisplayable(eventInfo[L1_key])"> {{eventInfo[L1_key]}}</div>
@@ -19,7 +19,19 @@ Viewing event <b>#{{eventID}}</b><br>
 		<li *ngFor="let L2_key of keys(eventInfo[L1_key])"><b>{{L2_key}}</b> :
 			<div *ngIf="isDisplayable(eventInfo[L1_key][L2_key])">{{eventInfo[L1_key][L2_key]}}</div>
 			<div *ngIf="!isDisplayable(eventInfo[L1_key][L2_key])">
+				<ul>
+				<li *ngFor="let L3_key of keys(eventInfo[L1_key][L2_key])"><b>{{L3_key}}</b> :
+					<div *ngIf="isDisplayable(eventInfo[L1_key][L2_key][L3_key])">{{eventInfo[L1_key][L2_key][L3_key]}}</div>
+					<div *ngIf="!isDisplayable(eventInfo[L1_key][L2_key][L3_key])">
+						<ul>
+						<li *ngFor="let L4_key of keys(eventInfo[L1_key][L2_key][L3_key])"><b>{{L4_key}}</b> :
+							<div *ngIf="isDisplayable(eventInfo[L1_key][L2_key][L3_key][L4_key])">{{eventInfo[L1_key][L2_key][L3_key][L4_key]}}</div>
+							<div *ngIf="!isDisplayable(eventInfo[L1_key][L2_key][L3_key][L4_key])">
 
+							</div>
+							</ul>
+					</div>
+					</ul>
 			</div>
 			</ul>
 	</div>
