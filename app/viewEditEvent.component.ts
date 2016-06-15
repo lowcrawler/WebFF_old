@@ -12,7 +12,7 @@ import {USGSEvent} from "./classes/USGSEvent.class";
 
 
 export class ViewEditEventComponent { //implements OnInit {
-
+//TODO - clean up code, lots of testing going on...
 public eventID = "";
 public eventData = "Loading...";
 public eventPromise : Promise<Object>;

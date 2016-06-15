@@ -33,6 +33,7 @@ export class EventsGridComponent implements OnInit  {
 		this._eventService.getEvents(null, null, null)
 	  		.subscribe(
 	  			(events:Array<USGSEvent>) =>  {
+					console.log(events);
 					this.rowData = events.map(event => event.getEventData()
 					);
 	  			},

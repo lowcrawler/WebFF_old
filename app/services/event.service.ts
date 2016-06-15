@@ -37,23 +37,19 @@ export class EventService  {
 // actual return values
 // no filter - return all events.
 	if(key==null && value==null) {
-		return this.getAllEvents()
-			.map(events =>
-				events.map(event =>
-					new USGSEvent(event);
-				)
-			);
+		console.log("No filter!");
+		return this.getAllEvents();
 	}
 
 // filtering for key/value match
 if(key!=null&&value!=null) {
 	return this.getAllEvents()
 	 .map(events => {
-		 var matches = events.filter(event => event[key] == value);
+		 var matches = events.filter(event => event.getEventData()[key] == value);
 		 if (matches.length == 0) {
 		   throw 'No matching event found for \''+key+'\'==\''+value+'\'';
 		 } else {
-		   return matches.map(eventData => new USGSEvent(eventData));
+		   return matches;
 		 }
 	 })
 	 .catch(e => {
@@ -65,7 +61,8 @@ if(key!=null&&value!=null) {
 }
 
 
-	private getAllEvents(): Observable<Array<any>> {  //todo this should be any array of <t>events
+	 getAllEvents(): Observable<Array<USGSEvent>> {  // pulls all events from DB and LS, converts to event objects and returns and observable
+		//todo - should be private
 		//TODO - caching
 		//TODO - mock/testing  and  live/DB option
 		//TODO - fill out from local storage, then hit the DB and update....
@@ -73,10 +70,13 @@ if(key!=null&&value!=null) {
 		//TODO - gather up all events in LS and return
 
 		// get events from DB,
-		//TODO this should be a different observable, not just passed through, of course.
 		//TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
-
-			return this.getHTTPEvents();
+			return this.getHTTPEvents()
+			.map(events =>
+				events.map(eventJSON =>
+					new USGSEvent(eventJSON)
+				)
+			);
 
 
 		 // TODO - add events from DB that were not in the LS and update
@@ -86,8 +86,8 @@ if(key!=null&&value!=null) {
 
 	private eventsUrl = 'app/mocks/mock-events.json';  // URL to web API that returns JSON array of events
 
-	private getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
-		 //todo this should be any array of <t>events
+	 getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
+		 // todo this should be private
 		return this._http.get(this.eventsUrl)
 										.map(response => response.json()['events'])
 										.catch(this.handleError);

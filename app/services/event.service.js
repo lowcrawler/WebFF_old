@@ -40,24 +40,19 @@ var EventService = (function () {
         // actual return values
         // no filter - return all events.
         if (key == null && value == null) {
-            return this.getAllEvents()
-                .map(function (events) {
-                return events.map(function (event) {
-                    return new USGSEvent_class_1.USGSEvent(event);
-                });
-            });
-            ;
+            console.log("No filter!");
+            return this.getAllEvents();
         }
         // filtering for key/value match
         if (key != null && value != null) {
             return this.getAllEvents()
                 .map(function (events) {
-                var matches = events.filter(function (event) { return event[key] == value; });
+                var matches = events.filter(function (event) { return event.getEventData()[key] == value; });
                 if (matches.length == 0) {
                     throw 'No matching event found for \'' + key + '\'==\'' + value + '\'';
                 }
                 else {
-                    return matches.map(function (eventData) { return new USGSEvent_class_1.USGSEvent(eventData); });
+                    return matches;
                 }
             })
                 .catch(function (e) {
@@ -67,18 +62,23 @@ var EventService = (function () {
         }
     };
     EventService.prototype.getAllEvents = function () {
+        //todo - should be private
         //TODO - caching
         //TODO - mock/testing  and  live/DB option
         //TODO - fill out from local storage, then hit the DB and update....
         //TODO - gather up all events in LS and return
         // get events from DB,
-        //TODO this should be a different observable, not just passed through, of course.
         //TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
-        return this.getHTTPEvents();
+        return this.getHTTPEvents()
+            .map(function (events) {
+            return events.map(function (eventJSON) {
+                return new USGSEvent_class_1.USGSEvent(eventJSON);
+            });
+        });
         // TODO - add events from DB that were not in the LS and update
     };
     EventService.prototype.getHTTPEvents = function () {
-        //todo this should be any array of <t>events
+        // todo this should be private
         return this._http.get(this.eventsUrl)
             .map(function (response) { return response.json()['events']; })
             .catch(this.handleError);
