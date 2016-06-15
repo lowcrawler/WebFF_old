@@ -10,26 +10,30 @@
   <script src="../node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
 </head>
 <body>
-	<!-- #1. add the system.js library -->
+	<!-- #1. add the system.js and angular libraries -->
+	  <script src="node_modules/zone.js/dist/zone.js"></script>
+	  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+	  <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-
-<!--script src="systemjs.config.js"></script-->
+	  <script src="systemjs.config.js"></script>
 
 <script>
 
 // #2. Configure systemjs to use the .js extension
  //     for imports from the app folder
- System.config({
-   packages: {
-	 'app': {defaultExtension: 'js'}
-   }
- });
+ // System.config({
+ //   packages: {
+ //  'app': {defaultExtension: 'js'}
+ //   }
+ // });
 
 setTimeout(function() {
 	Promise.all([
   // #3. Import the spec file explicitly
-  System.import('app/USGSEvent.class.spec'),
-    System.import('app/services/question.service.spec')
+  	System.import('app/classes/USGSEvent.class.spec'),
+    System.import('app/services/question.service.spec'),
+	System.import('app/services/event.service.spec')
+
 ])
 	// #4. wait for all imports to load ...
 	//     then re-execute `window.onload` which

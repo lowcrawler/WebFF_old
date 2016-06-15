@@ -1,8 +1,7 @@
 import { QuestionService } from './question.service';
 describe('QuestionService tests', () => {
 
-it("True is True",()=>{
-	expect(true).toEqual(true);
-});
-
+	it("MUST DO QUESTION SERVICE TESTS!",()=>{
+		expect(true).toEqual(true);
+	});
 });

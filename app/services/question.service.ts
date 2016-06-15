@@ -7,56 +7,37 @@ import 'rxjs/add/operator/share';
 
 @Injectable()
 export class QuestionService  {
-	// service provides interaction for pages that need/have questions.
+// service provides interaction for pages that need/have questions.
 
 	constructor (private _http: Http) {}
 
-	public getEvents(key:string,value:string,matchFilter:boolean) : Observable<Array<any>> {
+	public getQuestions(key:string,value:string,matchFilter:boolean) : Observable<Array<any>> {
 		//TOOD Filter interface as parameters
 		// returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
 		// If filter values are null, return all events)
-	console.log('getEvents('+key+','+value+','+matchFilter+')');
+		console.log('getEvents('+key+','+value+','+matchFilter+')');
 
-// unfinished features
-	if(matchFilter!=null) { 	//todo: build matchFilter into plan
-		console.warn("matchFilter in getEvents in event.service not currently implemented.");
-	}
-	if(key!=null && value==null) { //todo
-		console.warn("matching based on key existence in getEvents in event.service not currently implemented and may return unexpected values");
-	}
-	if(key==null && value!=null) { //todo
-		console.warn("matching based on values without keys in getEvents in event.service not currently implemented and may return unexpected values");
-	}
+		// unfinished features
+		if(matchFilter!=null) { 	//todo: build matchFilter into plan
+			console.warn("matchFilter in getEvents in event.service not currently implemented.");
+		}
+		if(key!=null && value==null) { //todo
+			console.warn("matching based on key existence in getEvents in event.service not currently implemented and may return unexpected values");
+		}
+		if(key==null && value!=null) { //todo
+			console.warn("matching based on values without keys in getEvents in event.service not currently implemented and may return unexpected values");
+		}
 
-// actual return values
-// no filter - return all events.
-	if(key==null && value==null) {
-		return this.getAllEvents();
-	}
+		// actual return values
+		// no filter - return all events.
+		if(key==null && value==null) {
+			return this.getAllQuestions();
+		}
 
-// filtering for key/value match
-if(key!=null&&value!=null) {
-	return this.getAllEvents()
-	 .map(events => {
-		 var matches = events.filter(event => event[key] == value);
-		 if (matches.length == 0) {
-		   throw 'No matching event found for \''+key+'\'==\''+value+'\'';
-		 } else {
-		   return matches; /*.map(function(evt) {
-			   return new USGSEvent(evt);
-		   });  //todo - should return them all */
-		 }
-	 })
-	 .catch(e => {
-	   	console.error(e);
-	   	return e;
-	 });
- }
-
-}
+	} // end getQuestions
 
 
-	private getAllEvents(): Observable<Array<any>> {  //todo this should be any array of <t>events
+	private getAllQuestions(): Observable<Array<any>> {  //todo this should be any array of <t>events
 		//TODO - caching
 		//TODO - mock/testing  and  live/DB option
 		//TODO - fill out from local storage, then hit the DB and update....
@@ -66,16 +47,16 @@ if(key!=null&&value!=null) {
 		// get events from DB,
 		//TODO this should be a different observable, not just passed through, of course.
 		//TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
-		return this.getHTTPEvents();
+		return this.getHTTPQuestions();
 
 		 // TODO - add events from DB that were not in the LS and update
 
 
 	}
 
-	private eventsUrl = 'app/mocks/mock-events.json';  // URL to web API that returns JSON array of events
+	private eventsUrl = 'app/mocks/mock-questions.json';  // URL to web API that returns JSON array of events
 
-	getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
+	getHTTPQuestions() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
 		 //todo this should be any array of <t>events
 		return this._http.get(this.eventsUrl)
 										.map(response => response.json()['events'])

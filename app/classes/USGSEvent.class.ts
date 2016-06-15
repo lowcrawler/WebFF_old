@@ -1,4 +1,5 @@
-import {Utilities} from './utilities';
+
+import {Utilities} from '../utilities';
 
 export class USGSEvent {
 	eventData:JSON;

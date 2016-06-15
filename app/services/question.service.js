@@ -18,9 +18,9 @@ var QuestionService = (function () {
     // service provides interaction for pages that need/have questions.
     function QuestionService(_http) {
         this._http = _http;
-        this.eventsUrl = 'app/mocks/mock-events.json'; // URL to web API that returns JSON array of events
+        this.eventsUrl = 'app/mocks/mock-questions.json'; // URL to web API that returns JSON array of events
     }
-    QuestionService.prototype.getEvents = function (key, value, matchFilter) {
+    QuestionService.prototype.getQuestions = function (key, value, matchFilter) {
         //TOOD Filter interface as parameters
         // returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
         // If filter values are null, return all events)
@@ -38,29 +38,10 @@ var QuestionService = (function () {
         // actual return values
         // no filter - return all events.
         if (key == null && value == null) {
-            return this.getAllEvents();
+            return this.getAllQuestions();
         }
-        // filtering for key/value match
-        if (key != null && value != null) {
-            return this.getAllEvents()
-                .map(function (events) {
-                var matches = events.filter(function (event) { return event[key] == value; });
-                if (matches.length == 0) {
-                    throw 'No matching event found for \'' + key + '\'==\'' + value + '\'';
-                }
-                else {
-                    return matches; /*.map(function(evt) {
-                        return new USGSEvent(evt);
-                    });  //todo - should return them all */
-                }
-            })
-                .catch(function (e) {
-                console.error(e);
-                return e;
-            });
-        }
-    };
-    QuestionService.prototype.getAllEvents = function () {
+    }; // end getQuestions
+    QuestionService.prototype.getAllQuestions = function () {
         //TODO - caching
         //TODO - mock/testing  and  live/DB option
         //TODO - fill out from local storage, then hit the DB and update....
@@ -68,10 +49,10 @@ var QuestionService = (function () {
         // get events from DB,
         //TODO this should be a different observable, not just passed through, of course.
         //TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
-        return this.getHTTPEvents();
+        return this.getHTTPQuestions();
         // TODO - add events from DB that were not in the LS and update
     };
-    QuestionService.prototype.getHTTPEvents = function () {
+    QuestionService.prototype.getHTTPQuestions = function () {
         //todo this should be any array of <t>events
         return this._http.get(this.eventsUrl)
             .map(function (response) { return response.json()['events']; })
