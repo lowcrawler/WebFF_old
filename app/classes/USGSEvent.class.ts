@@ -33,6 +33,10 @@ export class USGSEvent {
 		return this.eventID;
 	}
 
+	getEventDataAsXML():string {
+		//todo
+		return null;
+	}
 	// toString():string {
 	// 	return "You used Too String!!";
 	// }

@@ -30,7 +30,7 @@ export class EventsGridComponent implements OnInit  {
 	constructor(private _router: Router, private _eventService:EventService) {}
 
 	ngOnInit() {
-		this._eventService.getEvents(null, null, null)
+		this._eventService.getEvents(null, null)
 	  		.subscribe(
 	  			(events:Array<USGSEvent>) =>  {
 					console.log(events);

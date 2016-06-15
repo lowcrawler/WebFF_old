@@ -49,7 +49,7 @@ public event : USGSEvent;
 	ngOnInit() {
 		console.log("viewEditEvent.component(ngOnInit)");
 		this.eventID = this.params.getParam('eventid'); //TODO: need to work off event GUID
-		this._eventService.getEvents('eventID', this.eventID, true)
+		this._eventService.getEvents('eventID', this.eventID)
 			.subscribe(
 				events => {
 					if(events.length==0) {  // todo - If zero are returned, this code never runs because there is nothing to 'subscribe' to

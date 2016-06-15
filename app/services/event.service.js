@@ -22,15 +22,12 @@ var EventService = (function () {
         this.eventsUrl = 'app/mocks/mock-events.json'; // URL to web API that returns JSON array of events
     }
     //private var events;  //todo implement when instantiation and/or pre-fetch?
-    EventService.prototype.getEvents = function (key, value, matchFilter) {
+    EventService.prototype.getEvents = function (key, value) {
         //TOOD Filter interface as parameters
         // returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
         // If filter values are null, return all events)
-        console.log('getEvents(' + key + ',' + value + ',' + matchFilter + ')');
+        console.log('getEvents(' + key + ',' + value + ')');
         // unfinished features
-        if (matchFilter != null) {
-            console.warn("matchFilter in getEvents in event.service not currently implemented.");
-        }
         if (key != null && value == null) {
             console.warn("matching based on key existence in getEvents in event.service not currently implemented and may return unexpected values");
         }
@@ -40,7 +37,6 @@ var EventService = (function () {
         // actual return values
         // no filter - return all events.
         if (key == null && value == null) {
-            console.log("No filter!");
             return this.getAllEvents();
         }
         // filtering for key/value match

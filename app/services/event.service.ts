@@ -17,16 +17,13 @@ export class EventService  {
 
 
 
-	public getEvents(key:string,value:string,matchFilter:boolean) : Observable<Array<USGSEvent>> {
+	public getEvents(key:string,value:string) : Observable<Array<USGSEvent>> {
 		//TOOD Filter interface as parameters
 		// returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
 		// If filter values are null, return all events)
-	console.log('getEvents('+key+','+value+','+matchFilter+')');
+	console.log('getEvents('+key+','+value+')');
 
 // unfinished features
-	if(matchFilter!=null) { 	//todo: build matchFilter into plan
-		console.warn("matchFilter in getEvents in event.service not currently implemented.");
-	}
 	if(key!=null && value==null) { //todo
 		console.warn("matching based on key existence in getEvents in event.service not currently implemented and may return unexpected values");
 	}
@@ -37,7 +34,6 @@ export class EventService  {
 // actual return values
 // no filter - return all events.
 	if(key==null && value==null) {
-		console.log("No filter!");
 		return this.getAllEvents();
 	}
 

@@ -23,6 +23,10 @@ var USGSEvent = (function () {
     USGSEvent.prototype.getEventID = function () {
         return this.eventID;
     };
+    USGSEvent.prototype.getEventDataAsXML = function () {
+        //todo
+        return null;
+    };
     return USGSEvent;
 }());
 exports.USGSEvent = USGSEvent;
