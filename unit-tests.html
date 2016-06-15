@@ -28,7 +28,8 @@
 setTimeout(function() {
 	Promise.all([
   // #3. Import the spec file explicitly
-  System.import('app/USGSEvent.class.spec')
+  System.import('app/USGSEvent.class.spec'),
+    System.import('app/services/question.service.spec')
 ])
 	// #4. wait for all imports to load ...
 	//     then re-execute `window.onload` which
@@ -37,6 +38,7 @@ setTimeout(function() {
 	.then(window.onload)
 	.catch(console.error.bind(console));
 }, 500);
+
 </script>
 
 </body>

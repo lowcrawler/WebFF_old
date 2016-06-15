@@ -1,6 +1,6 @@
 import { Component, OnInit }       	from '@angular/core';
 import {RouteSegment} from '@angular/router';
-import {EventService}	from './event.service';
+import {EventService}	from './services/event.service';
 import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 
 @Component ({
