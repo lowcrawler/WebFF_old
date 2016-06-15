@@ -12,7 +12,7 @@ export class USGSEvent {
 			_eventID=Utilities.newGuidPlus();
 		}
 		this.eventID = _eventID;
-		this.eventData = _eventData;
+		this.setEventData(_eventData); // use setEventData
 	}
 
 	setEventData(eventData:JSON) { // sets FULL event, overwritting old event
@@ -32,4 +32,8 @@ export class USGSEvent {
 	getEventID():string {
 		return this.eventID;
 	}
+
+	// toString():string {
+	// 	return "You used Too String!!";
+	// }
 }

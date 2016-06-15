@@ -3,6 +3,7 @@ import { AgGridNg2 } from 'ag-grid-ng2/main';
 import {GridOptions} from 'ag-grid/main';
 import { Router } from '@angular/router';
 import { EventService }		from './services/event.service';
+import {USGSEvent} from './classes/USGSEvent.class';
 
 @Component ({
 	selector:
@@ -31,10 +32,9 @@ export class EventsGridComponent implements OnInit  {
 	ngOnInit() {
 		this._eventService.getEvents(null, null, null)
 	  		.subscribe(
-	  			events => {
-					//this.setRowData(events);
-					this.rowData = events;
-					console.log(events);
+	  			(events:Array<USGSEvent>) =>  {
+					this.rowData = events.map(event => event.getEventData()
+					);
 	  			},
 	  			error =>
 					this.errorMessage  = <any>error + "ERROR: Unable to load events for grid construction: "

@@ -2,6 +2,7 @@ import { Component, OnInit }       	from '@angular/core';
 import {RouteSegment} from '@angular/router';
 import {EventService}	from './services/event.service';
 import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
+import {USGSEvent} from "./classes/USGSEvent.class";
 
 @Component ({
 	templateUrl:
@@ -23,7 +24,8 @@ docs:Object;
 errorMessage: string;
 httpTestEvents: Array<any>;//TODO: array of events
 testArray : Array<any> = ['A','B','C'];
-eventInfo = "LOADING...";
+eventInfo:JSON;
+public event : USGSEvent;
 
  constructor(private params: RouteSegment, private _eventService:EventService){
 	 this.testJSON = {
@@ -57,10 +59,10 @@ eventInfo = "LOADING...";
 						alert("More than one event was returned for this page.  This is potentially a serious error.  Press F12 to view the console and send the error to jfederer@usgs.gov \n\nProceeding may risk your data.");
 						console.error("More than one event was returned for " + this.eventID);
 					}
-					console.log("All returned: " + events);
-					console.log("Zero: " + events[0]);
-					this.eventData = JSON.stringify(events[0]);
-					this.eventInfo = events[0];
+					this.event = events[0];
+					this.eventData = JSON.stringify(this.event);
+					this.eventInfo = this.event.getEventData();
+
 				},
 				error =>  {
 					this.errorMessage = <any>error;

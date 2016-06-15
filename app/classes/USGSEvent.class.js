@@ -7,7 +7,7 @@ var USGSEvent = (function () {
             _eventID = utilities_1.Utilities.newGuidPlus();
         }
         this.eventID = _eventID;
-        this.eventData = _eventData;
+        this.setEventData(_eventData); // use setEventData
     }
     USGSEvent.prototype.setEventData = function (eventData) {
         //TODO - check if eventID is in the eventINFO and ensure it matches if it is

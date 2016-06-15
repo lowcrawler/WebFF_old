@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+var USGSEvent_class_1 = require('../classes/USGSEvent.class');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/share');
@@ -39,7 +40,13 @@ var EventService = (function () {
         // actual return values
         // no filter - return all events.
         if (key == null && value == null) {
-            return this.getAllEvents();
+            return this.getAllEvents()
+                .map(function (events) {
+                return events.map(function (event) {
+                    return new USGSEvent_class_1.USGSEvent(event);
+                });
+            });
+            ;
         }
         // filtering for key/value match
         if (key != null && value != null) {
@@ -50,9 +57,7 @@ var EventService = (function () {
                     throw 'No matching event found for \'' + key + '\'==\'' + value + '\'';
                 }
                 else {
-                    return matches; /*.map(function(evt) {
-                        return new USGSEvent(evt);
-                    });  //todo - should return them all */
+                    return matches.map(function (eventData) { return new USGSEvent_class_1.USGSEvent(eventData); });
                 }
             })
                 .catch(function (e) {
