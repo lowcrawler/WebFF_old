@@ -37,12 +37,8 @@ eventInfo = "LOADING...";
   keys(obj) : Array<string> {  // works, check here for better? http://stackoverflow.com/questions/31490713/iterate-over-typescript-dictionary-in-angular-2
     return Object.keys(obj);
   }
-  // keys() : Array<string> {  // works, check here for better? http://stackoverflow.com/questions/31490713/iterate-over-typescript-dictionary-in-angular-2
-  // eturn Object.keys(this.eventInfo);
-  // }
 
 	isDisplayable(obj):Boolean {
-		console.log(obj);
 		if(typeof obj === 'boolean' || typeof obj === 'number' || typeof obj === 'string') {
 			return true;
 		}

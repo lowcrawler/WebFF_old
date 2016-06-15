@@ -5,13 +5,13 @@ export class USGSEvent {
 	//todo - split out JSON into actual values and perhaps sub-class this for sediment, surface, groundwater, etc...
 	eventID:string;
 
-	constructor(eventData:JSON, eventID?:string) {
+	constructor(_eventData:JSON, _eventID?:string) {
 		//TODO - check if eventID is in the eventINFO and pull from there and/or check if they match?
-		if(eventID==null) {
-			eventID=Utilities.newGuidPlus();
+		if(_eventID==null) {
+			_eventID=Utilities.newGuidPlus();
 		}
-		this.eventID = eventID;
-		this.eventData = eventData;
+		this.eventID = _eventID;
+		this.eventData = _eventData;
 	}
 
 	setEventData(eventData:JSON) { // sets FULL event, overwritting old event

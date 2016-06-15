@@ -70,6 +70,7 @@ if(key!=null&&value!=null) {
 
 		// get events from DB,
 		//TODO this should be a different observable, not just passed through, of course.
+		//TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
 		return this.getHTTPEvents();
 
 		 // TODO - add events from DB that were not in the LS and update
@@ -77,7 +78,7 @@ if(key!=null&&value!=null) {
 
 	}
 
-	private eventsUrl = 'app/mock-events.json';  // URL to web API that returns JSON array of events
+	private eventsUrl = 'app/mocks/mock-events.json';  // URL to web API that returns JSON array of events
 
 	getHTTPEvents() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
 		 //todo this should be any array of <t>events
