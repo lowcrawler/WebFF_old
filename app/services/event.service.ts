@@ -67,7 +67,7 @@ if(key!=null&&value!=null) {
 
 		// get events from DB,
 		//TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
-			return this.getHTTPEvents()
+			return <Observable<Array<USGSEvent>>>this.getHTTPEvents()
 			.map(events =>
 				events.map(eventJSON =>
 					new USGSEvent(eventJSON)

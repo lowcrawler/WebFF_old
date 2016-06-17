@@ -49,5 +49,15 @@
 				"multiAllowed":true
 			}
 		}
-	}]
+	},{
+		"required": false,
+		"label": "What time is it?",
+		"xmlName":"time",
+		"type": "time",
+		"bounds_earliest":"600",
+		"bounds_latest":"1000"
+	}
+
+
+]
 }
