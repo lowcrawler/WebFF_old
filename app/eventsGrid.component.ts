@@ -30,10 +30,10 @@ export class EventsGridComponent implements OnInit  {
 	constructor(private _router: Router, private _eventService:EventService) {}
 
 	ngOnInit() {
+		console.log("eventsGrid.component(ngOnInit)");
 		this._eventService.getEvents(null, null)
 	  		.subscribe(
 	  			(events:Array<USGSEvent>) =>  {
-					console.log(events);
 					this.rowData = events.map(event => event.getEventData()
 					);
 	  			},
@@ -51,7 +51,6 @@ export class EventsGridComponent implements OnInit  {
 		var nodes:any[] = this.gridOptions.api.getSelectedNodes();
 		var viewEditAvailable = nodes.length==1 ? true : false;
 		this.selectedEventID = $event.node.data.eventID;
-		console.log('onRowClicked: ' + $event.node.data.eventID);
     }
 
 	private onViewEditClicked() {

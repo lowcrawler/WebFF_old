@@ -1,7 +1,7 @@
 import { Component, OnInit }       	from '@angular/core';
 import {RouteSegment} from '@angular/router';
 import {EventService}	from './services/event.service';
-import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
+//import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 import {USGSEvent} from "./classes/USGSEvent.class";
 
 @Component ({
@@ -13,32 +13,32 @@ import {USGSEvent} from "./classes/USGSEvent.class";
 
 export class ViewEditEventComponent { //implements OnInit {
 //TODO - clean up code, lots of testing going on...
-public eventID = "";
-public eventData = "Loading...";
-public eventPromise : Promise<Object>;
-public testout:string;
-testJSON : Object;
-testArr: Array<any>;
-@LocalStorage() public testLSString:string = '';
-docs:Object;
-errorMessage: string;
-httpTestEvents: Array<any>;//TODO: array of events
-testArray : Array<any> = ['A','B','C'];
-eventInfo:JSON;
-public event : USGSEvent;
+	public eventID = "";
+	public eventData = "Loading...";
+	public eventPromise : Promise<Object>;
+	public testout:string;
+	testJSON : Object;
+	testArr: Array<any>;
+//	@LocalStorage() public testLSString:string = '';
+	docs:Object;
+	errorMessage: string;
+	httpTestEvents: Array<any>;//TODO: array of events
+	testArray : Array<any> = ['A','B','C'];
+	eventInfo:JSON;
+	public event : USGSEvent;
 
- constructor(private params: RouteSegment, private _eventService:EventService){
-	 this.testJSON = {
-         id:123,
-         placeId: 31,
-         fb_id: 144423573684
-       };
-  }
+	constructor(private params: RouteSegment, private _eventService:EventService){
+		this.testJSON = {
+			id:123,
+			placeId: 31,
+			fb_id: 144423573684
+		};
+	}
 
 
-  keys(obj) : Array<string> {  // works, check here for better? http://stackoverflow.com/questions/31490713/iterate-over-typescript-dictionary-in-angular-2
-    return Object.keys(obj);
-  }
+	keys(obj) : Array<string> {  // works, check here for better? http://stackoverflow.com/questions/31490713/iterate-over-typescript-dictionary-in-angular-2
+		return Object.keys(obj);
+	}
 
 	isDisplayable(obj):Boolean {
 		if(typeof obj === 'boolean' || typeof obj === 'number' || typeof obj === 'string') {
@@ -90,7 +90,7 @@ public event : USGSEvent;
 	}
 
 	onModifyVarClick() {
-		this.testLSString = this.testLSString+"Changed";
+//		this.testLSString = this.testLSString+"Changed";
 	}
 
 	onModifyLSClick() {
