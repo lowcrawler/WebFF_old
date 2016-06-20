@@ -43,6 +43,12 @@ var Question = (function () {
         for (var key in this.generalInfo) {
             if (this.generalInfo.hasOwnProperty(key)) {
                 console.log(key);
+                if (!questionSpec.hasOwnProperty(key)) {
+                    throw new Error("Question spec was missing \'" + key + "\' key");
+                }
+                if (questionSpec[key] == "" || questionSpec[key] == null) {
+                    throw new Error("Question spec was missing \'" + key + "\' value");
+                }
             }
         }
     }
