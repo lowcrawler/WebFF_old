@@ -40,9 +40,10 @@ var Question = (function () {
         // this.label = questionSpec['label'];
         // this.xmlName = questionSpec['xmlName'];
         // this.required = questionSpec['required'];
-        for (var _i = 0, _a = Object.entries(this.generalInfo); _i < _a.length; _i++) {
-            var _b = _a[_i], key = _b[0], value = _b[1];
-            console.log(key);
+        for (var key in this.generalInfo) {
+            if (this.generalInfo.hasOwnProperty(key)) {
+                console.log(key);
+            }
         }
     }
     Question.prototype.getLabel = function () {

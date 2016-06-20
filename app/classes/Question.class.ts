@@ -51,9 +51,12 @@ export class Question {
 		// this.xmlName = questionSpec['xmlName'];
 		// this.required = questionSpec['required'];
 
-		for(let [key, value] of Object.entries(this.generalInfo)) {
 
-			console.log(key);
+
+		for(let key in this.generalInfo) {
+			if(this.generalInfo.hasOwnProperty(key)) {
+				console.log(key);
+			}
 		}
 
 
