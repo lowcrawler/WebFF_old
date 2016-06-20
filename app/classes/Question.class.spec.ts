@@ -79,6 +79,14 @@ describe('Question class tests', () => {
 			expect(q.getLabel()).toEqual('Station ID');
 		});
 
+		it("New Question object returns correct 'type'", () => {
+			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
+			let jsn = JSON.parse(str);
+			let q : Question = new Question(jsn);
+			console.log(q.getType());
+			expect(q.getType()).toEqual('Number');
+		});
+
 		it("New Question object correct 'required' value", () => {
 			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
@@ -87,8 +95,6 @@ describe('Question class tests', () => {
 		});
 
 		it("Constructor throws error when given JSON missing label key", ()=> {
-			console.log("MISSING KEY TEST");
-
 			let missingLabelKeyJSON = JSON.parse(JSON.stringify(numberQJSON));
 			delete missingLabelKeyJSON['label'];
 			let str = JSON.stringify(missingLabelKeyJSON); //todo - this can't be the best way to do this....

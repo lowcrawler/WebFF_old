@@ -75,6 +75,13 @@ describe('Question class tests', function () {
             var q = new Question_class_1.Question(jsn);
             expect(q.getLabel()).toEqual('Station ID');
         });
+        it("New Question object returns correct 'type'", function () {
+            var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
+            var jsn = JSON.parse(str);
+            var q = new Question_class_1.Question(jsn);
+            console.log(q.getType());
+            expect(q.getType()).toEqual('Number');
+        });
         it("New Question object correct 'required' value", function () {
             var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
@@ -82,7 +89,6 @@ describe('Question class tests', function () {
             expect(q.isRequired()).toEqual(true);
         });
         it("Constructor throws error when given JSON missing label key", function () {
-            console.log("MISSING KEY TEST");
             var missingLabelKeyJSON = JSON.parse(JSON.stringify(numberQJSON));
             delete missingLabelKeyJSON['label'];
             var str = JSON.stringify(missingLabelKeyJSON); //todo - this can't be the best way to do this....

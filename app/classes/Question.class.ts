@@ -1,46 +1,81 @@
 export class Question {
 
 	// items common to all questions:
-	private label:string;
-	private xmlName:string;
-	private required:boolean;
+	private generalInfo = {
+		"label" : "",
+		"xmlName" : "",
+		"required" : false  //false by default
+	}
+	// private label:string;
+	// private xmlName:string;
+	// private required:boolean;
+	private type:string; //todo subclasses
 
-	private requiredParametersArray = ['label','xmlName','required','type']
+	// private requiredParametersArray: Array<string> = ['label','xmlName','required','type'];
 	//todo - pull commons from file or structure so constructor can be cleaner?
 	//todo - add styles to label?
 
 	constructor(questionSpec:JSON) {
 		//TODO - check if eventID is in the eventINFO and pull from there and/or check if they match?
-		console.log("constructor(): ");
-		console.log(questionSpec);
+		// console.log("constructor(): ");
+		// console.log(questionSpec);
+
 
 		// verify the JSON data
-		this.requiredParametersArray.forEach( function(para) {
-			if (!questionSpec.hasOwnProperty(para)) {
-				console.log("missing key");
-				throw new Error("Question spec was missing \'"+para+"\' key");
-			}
+		// for(var i=0; i<this.requiredParametersArray.length; i++) {
+		// 	console.log("i = "+ i + " out of " + this.requiredParametersArray.length);
+		// 	console.log("checking... " + this.requiredParametersArray[i]);
+		// 	// console.log("index = " + index);
+		// 	// console.log("length = " + this.requiredParametersArray.length);
+		// 	// if (!questionSpec.hasOwnProperty(para)) {
+		// 	// 	throw new Error("Question spec was missing \'"+para+"\' key");
+		// 	// }
+		// 	//
+		// 	// if (questionSpec[para]=="" || questionSpec[para]==null) {
+		// 	// 	throw new Error("Question spec was missing \'"+para+"\' value");
+		// 	// }
+		//
+		// 	this[eval(this.requiredParametersArray[i])] = questionSpec[this.requiredParametersArray[i]];
+		//
+		// }
 
-			if (questionSpec[para]=="" || questionSpec[para]==null) {
-				console.log('missing value');
-				throw new Error("Question spec was missing \'"+para+"\' value");
-			}
-		});
+		// this.requiredParametersArray.forEach( function(para, index, arr) {
+		// 	if(this.isKeyValid(para,questionSpec)) {
+		// 		this[eval(para)] = questionSpec[para];
+		// 	}
+		//
+		//
+		// });
 
-		this.label = questionSpec['label'];
+		// this.label = questionSpec['label'];
+		// this.xmlName = questionSpec['xmlName'];
+		// this.required = questionSpec['required'];
 
-}
+		for(let [key, value] of Object.entries(this.generalInfo)) {
+
+			console.log(key);
+		}
+
+
+	}
+
+
 
 	getLabel() :string {
-		return this.label;
+		return requiredInfo.label;
 	}
 
 	getXMLName() :string {
-		return this.xmlName;
+		return requiredInfo.xmlName;
 	}
 
 	isRequired() :boolean {
-		return this.required;
+		return requiredInfo.required;
+	}
+
+	getType() : string {
+		return this.type; //todo (sub-types classes and objects)
+
 	}
 
 }
