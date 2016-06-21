@@ -12,22 +12,49 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var question_component_1 = require('../question/question.component');
 var question_service_1 = require('../../services/question.service');
+var USGSQuestion_class_1 = require('../../classes/USGSQuestion.class');
 var NewEventComponent = (function () {
     function NewEventComponent(_questionService) {
         this._questionService = _questionService;
     }
-    //questions:array<QuestionComponent>;
     NewEventComponent.prototype.ngOnInit = function () {
         console.log('NewEvent.component(ngOnInit)');
-        // this._questionService.getQuestions()
+        this.testText = "this is passed text!";
+        this.testObj = { "foo": "bar", "baz": "qux" };
+        var numberQJSON = {
+            "required": true,
+            "label": "Station ID",
+            "xmlName": "stationID",
+            "type": "Number",
+            "bounds_lower": 99999,
+            "bounds_upper": 999999
+        };
+        var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
+        var jsn = JSON.parse(str);
+        var q = new USGSQuestion_class_1.USGSQuestion(jsn);
+        this.singleQuestion = q;
+        //
+        // this._questionService.getQuestions(null,null)
         // 	.subscribe(
-        // 		(questions:Array<Question>) => {
-        // 			questions.map(question => console.log(question));
+        // 		(questions:Array<USGSQuestion>) => {
+        // 			//this.oneQuestion = new QuestionComponent(questions[0]);
+        //
+        // 			//  questions.map(
+        // 			// 	(question:USGSQuestion) => {
+        // 			// 	console.log(question);
+        // 			// 	var newQuest:QuestionComponent = new QuestionComponent();
+        // 			// 	this.pageQuestions.push(newQuest);
+        // 			// 	console.log(this.pageQuestions.length);
+        // 			//  });
         // 		},
-        // 		error => this.errorMessage  = <any>error + "ERROR: Unable to load questions for form construction: "
+        // 		error => {
+        // 			console.log("err");
+        // 			//this.errorMessage  = <any>error + "ERROR: Unable to load questions for form construction: ";
+        // 			console.error(error);
+        // 		}
         // 	);
-        //TODO: Create array of question components
-        //ngfor through said array in template
+        // TODO: Create array of question components
+        // ngfor through said array in template
     };
     NewEventComponent = __decorate([
         core_1.Component({

@@ -97,25 +97,24 @@ describe('USGSQuestion class tests', () => {
 		it("Constructor throws error when given JSON missing label key", ()=> {
 			let missingLabelKeyJSON = JSON.parse(JSON.stringify(numberQJSON));
 			delete missingLabelKeyJSON['label'];
-			let str = JSON.stringify(missingLabelKeyJSON); //todo - this can't be the best way to do this....
-			let jsn = JSON.parse(str);
-			expect( ()=> new USGSQuestion(jsn) ).toThrow(new Error("USGSQuestion spec was missing 'label' key"));
+			expect( ()=> new USGSQuestion(missingLabelKeyJSON) ).toThrow(new Error("USGSQuestion spec was missing 'label' key"));
 		});
 
 		it("Constructor throws error when given JSON missing xmlName value", ()=> {
 			let blankLabelJSON = JSON.parse(JSON.stringify(numberQJSON));
 			blankLabelJSON['xmlName'] = "";
-			let str = JSON.stringify(blankLabelJSON); //todo - this can't be the best way to do this....
-			let jsn = JSON.parse(str);
-			expect( ()=> new USGSQuestion(jsn) ).toThrow(new Error("USGSQuestion spec was missing 'xmlName' value"));
+			expect( ()=> new USGSQuestion(blankLabelJSON) ).toThrow(new Error("USGSQuestion spec was missing 'xmlName' value"));
 		});
 
 		it("Constructor throws error when given JSON with null required value", ()=> {
 			let nullValuelJSON = JSON.parse(JSON.stringify(numberQJSON));
 			nullValuelJSON['required'] = null;
-			let str = JSON.stringify(nullValuelJSON); //todo - this can't be the best way to do this....
-			let jsn = JSON.parse(str);
-			expect( ()=> new USGSQuestion(jsn) ).toThrow(new Error("USGSQuestion spec was missing 'required' value"));
+			expect( ()=> new USGSQuestion(nullValuelJSON) ).toThrow(new Error("USGSQuestion spec was missing 'required' value"));
+		});
+		it("Constructor throws error when given JSON with false required value", ()=> {
+			let falseValuelJSON = JSON.parse(JSON.stringify(numberQJSON));
+			falseValuelJSON['required'] = false;
+			expect( ()=> new USGSQuestion(falseValuelJSON) ).not.toThrow(new Error("USGSQuestion spec was missing 'required' value"));
 		});
 
 

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+var USGSQuestion_class_1 = require('../classes/USGSQuestion.class');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/share');
@@ -20,20 +21,18 @@ var QuestionService = (function () {
         this._http = _http;
         this.questionsUrl = 'app/mocks/mock-questions.json'; // URL to web API that returns JSON array of events
     }
-    QuestionService.prototype.getQuestions = function (key, value, matchFilter) {
+    QuestionService.prototype.getQuestions = function (key, value) {
         //TOOD Filter interface as parameters
         // returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
         // If filter values are null, return all events)
-        console.log('getEvents(' + key + ',' + value + ',' + matchFilter + ')');
+        console.log('getQuestions(' + key + ',' + value + ')');
+        console.warn('getQuestions(' + key + ',' + value + ') -- FILTERING NOT ENABLED!');
         // unfinished features
-        if (matchFilter != null) {
-            console.warn("matchFilter in getEvents in event.service not currently implemented.");
-        }
         if (key != null && value == null) {
-            console.warn("matching based on key existence in getEvents in event.service not currently implemented and may return unexpected values");
+            console.warn("matching based on key existence in getQuestions in question.service not currently implemented and may return unexpected values");
         }
         if (key == null && value != null) {
-            console.warn("matching based on values without keys in getEvents in event.service not currently implemented and may return unexpected values");
+            console.warn("matching based on values without keys in getQuestions in question.service not currently implemented and may return unexpected values");
         }
         // actual return values
         // no filter - return all events.
@@ -49,13 +48,18 @@ var QuestionService = (function () {
         // get questions from DB,
         //TODO this should be a different observable, not just passed through, of course.
         //TODO need to deal with something if this fails (one way to make fail is to change the questionsUrl)
-        return this.getHTTPQuestions();
+        return this.getHTTPQuestions()
+            .map(function (questions) {
+            return questions.map(function (questionJSON) {
+                return new USGSQuestion_class_1.USGSQuestion(questionJSON);
+            });
+        });
         // TODO - add events from DB that were not in the LS and update
     };
     QuestionService.prototype.getHTTPQuestions = function () {
         //todo this should be any array of <t>events
         return this._http.get(this.questionsUrl)
-            .map(function (response) { return response.json()['events']; })
+            .map(function (response) { return response.json()['questions']; })
             .catch(this.handleError);
     };
     /*

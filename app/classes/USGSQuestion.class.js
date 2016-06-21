@@ -1,6 +1,5 @@
 "use strict";
 var USGSQuestion = (function () {
-    // private requiredParametersArray: Array<string> = ['label','xmlName','required','type'];
     //todo - pull commons from file or structure so constructor can be cleaner?
     //todo - add styles to label?
     function USGSQuestion(questionSpec) {
@@ -12,7 +11,7 @@ var USGSQuestion = (function () {
             "label": "",
             "xmlName": "",
             "required": false,
-            "type": ""
+            "type": "" //TODO: subsclasses
         };
         // verify the questionSpec has the required general info and, if so assign to the generalInfo object.  If not, throw an error.
         for (var key in this.generalInfo) {
@@ -20,7 +19,7 @@ var USGSQuestion = (function () {
                 if (!questionSpec.hasOwnProperty(key)) {
                     throw new Error("USGSQuestion spec was missing \'" + key + "\' key");
                 }
-                if (questionSpec[key] == "" || questionSpec[key] == null) {
+                if (questionSpec[key] === "" || questionSpec[key] == null) {
                     throw new Error("USGSQuestion spec was missing \'" + key + "\' value");
                 }
                 this.generalInfo[key] = questionSpec[key];
@@ -39,6 +38,9 @@ var USGSQuestion = (function () {
     };
     USGSQuestion.prototype.getType = function () {
         return this.generalInfo.type; //todo (sub-types classes and objects)
+    };
+    USGSQuestion.prototype.toString = function () {
+        return "Question: Label-" + this.getLabel() + " xmlName-" + this.getXMLName() + " required-" + this.isRequired();
     };
     return USGSQuestion;
 }());

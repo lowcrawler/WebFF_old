@@ -12,21 +12,19 @@ export class QuestionService  {
 
 	constructor (private _http: Http) {}
 
-	public getQuestions(key:string,value:string,matchFilter:boolean) : Observable<Array<USGSQuestion>> {
+	public getQuestions(key:string,value:string) : Observable<Array<USGSQuestion>> {
 		//TOOD Filter interface as parameters
 		// returns all events that pass (match if matchFilter is true, are excluded by filter if matchFilter is false) the filter.
 		// If filter values are null, return all events)
-		console.log('getEvents('+key+','+value+','+matchFilter+')');
+		console.log('getQuestions('+key+','+value+')');
+		console.warn('getQuestions('+key+','+value+') -- FILTERING NOT ENABLED!');
 
 		// unfinished features
-		if(matchFilter!=null) { 	//todo: build matchFilter into plan
-			console.warn("matchFilter in getEvents in event.service not currently implemented.");
-		}
 		if(key!=null && value==null) { //todo
-			console.warn("matching based on key existence in getEvents in event.service not currently implemented and may return unexpected values");
+			console.warn("matching based on key existence in getQuestions in question.service not currently implemented and may return unexpected values");
 		}
 		if(key==null && value!=null) { //todo
-			console.warn("matching based on values without keys in getEvents in event.service not currently implemented and may return unexpected values");
+			console.warn("matching based on values without keys in getQuestions in question.service not currently implemented and may return unexpected values");
 		}
 
 		// actual return values
@@ -48,7 +46,12 @@ export class QuestionService  {
 		// get questions from DB,
 		//TODO this should be a different observable, not just passed through, of course.
 		//TODO need to deal with something if this fails (one way to make fail is to change the questionsUrl)
-		return this.getHTTPQuestions();
+		return <Observable<Array<USGSQuestion>>> this.getHTTPQuestions()
+			.map(questions =>
+				questions.map(questionJSON =>
+					new USGSQuestion(questionJSON)
+				)
+			);
 
 		 // TODO - add events from DB that were not in the LS and update
 
@@ -60,7 +63,7 @@ export class QuestionService  {
 	getHTTPQuestions() : Observable<Array<any>> { // calls to eventsURL and returns all users events in DB in an array of JSON objects
 		 //todo this should be any array of <t>events
 		return this._http.get(this.questionsUrl)
-										.map(response => response.json()['events'])
+										.map(response => response.json()['questions'])
 										.catch(this.handleError);
 	}
 

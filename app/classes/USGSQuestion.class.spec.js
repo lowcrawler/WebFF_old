@@ -91,23 +91,22 @@ describe('USGSQuestion class tests', function () {
         it("Constructor throws error when given JSON missing label key", function () {
             var missingLabelKeyJSON = JSON.parse(JSON.stringify(numberQJSON));
             delete missingLabelKeyJSON['label'];
-            var str = JSON.stringify(missingLabelKeyJSON); //todo - this can't be the best way to do this....
-            var jsn = JSON.parse(str);
-            expect(function () { return new USGSQuestion_class_1.USGSQuestion(jsn); }).toThrow(new Error("USGSQuestion spec was missing 'label' key"));
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(missingLabelKeyJSON); }).toThrow(new Error("USGSQuestion spec was missing 'label' key"));
         });
         it("Constructor throws error when given JSON missing xmlName value", function () {
             var blankLabelJSON = JSON.parse(JSON.stringify(numberQJSON));
             blankLabelJSON['xmlName'] = "";
-            var str = JSON.stringify(blankLabelJSON); //todo - this can't be the best way to do this....
-            var jsn = JSON.parse(str);
-            expect(function () { return new USGSQuestion_class_1.USGSQuestion(jsn); }).toThrow(new Error("USGSQuestion spec was missing 'xmlName' value"));
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(blankLabelJSON); }).toThrow(new Error("USGSQuestion spec was missing 'xmlName' value"));
         });
         it("Constructor throws error when given JSON with null required value", function () {
             var nullValuelJSON = JSON.parse(JSON.stringify(numberQJSON));
             nullValuelJSON['required'] = null;
-            var str = JSON.stringify(nullValuelJSON); //todo - this can't be the best way to do this....
-            var jsn = JSON.parse(str);
-            expect(function () { return new USGSQuestion_class_1.USGSQuestion(jsn); }).toThrow(new Error("USGSQuestion spec was missing 'required' value"));
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(nullValuelJSON); }).toThrow(new Error("USGSQuestion spec was missing 'required' value"));
+        });
+        it("Constructor throws error when given JSON with false required value", function () {
+            var falseValuelJSON = JSON.parse(JSON.stringify(numberQJSON));
+            falseValuelJSON['required'] = false;
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(falseValuelJSON); }).not.toThrow(new Error("USGSQuestion spec was missing 'required' value"));
         });
     }); // end constructor tests
     // });

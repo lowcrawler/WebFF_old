@@ -1,8 +1,38 @@
 <div style="background-color:Thistle">
 <h4>Question:</h4>
-<div id="quest">
-<!-- TODO -- Limit size of event grid and perhaps add scroll bar -->
-<input type="text" />
+
+<div *ngIf="!justText">
+	no text passed
 </div>
+<div *ngIf="justText">
+	<b>Here is the passed Text:</b><br>
+	 {{justText}} <br>
+</div>
+<br>
+<
+<div *ngIf="!justObj">
+	no obj passed
+</div>
+<div *ngIf="justObj">
+	<b>Here is the passed JSON:</b><br>
+	 Foo: {{justObj.foo}} <br>
+	 Baz: {{justObj.baz}}
+</div>
+<br>
+<div class="question">
+	<i>I am a question spot</i>
+
+	<div *ngIf="!myQuestion">
+		Loading Question...
+	</div>
+	<div *ngIf="myQuestion">
+		<b>Here is the passed question:</b><br>
+		 {{myQuestion}} <br>
+	</div>
+</div>
+
+<button (click)="onClick()">Clickit</button>
+
+
 <filename>question.component.html</filename>
 </div>

@@ -2,13 +2,19 @@
 <h2>NEW EVENT</h2>
 New Sediment Event (more to come)
 <br>
-<question></question>
-<br><br>
-<question></question>
-<br><br>
-<question></question>
-<br><br>
-<question></question>
+<!-- <div *ngFor="let question of pageQuestions">
+	<question [myQuestion]="question" [someText]="Hiya"></question>
+</div> -->
+<!-- <div *ngIf="!oneQuestion">
+	No oneQuestion here
+</div>
+<div *ngIf="oneQuestion">
+	There is oneQuestion is the question:
+	 {{oneQuestion}} <br>
+</div> -->
+
+<question [(justText)]="testText"  [(justObj)]="testObj" [(myQuestion)]="singleQuestion"></question>
+
 <br><br>
 <filename>newEvent.component.html</filename>
 </div>
