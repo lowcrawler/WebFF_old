@@ -4,7 +4,8 @@ export class Question {
 	private generalInfo = {
 		"label" : "",
 		"xmlName" : "",
-		"required" : false  //false by default
+		"required" : false,  //false by default
+		"type" : ""
 	}
 	// private label:string;
 	// private xmlName:string;
@@ -21,69 +22,38 @@ export class Question {
 		// console.log(questionSpec);
 
 
-		// verify the JSON data
-		// for(var i=0; i<this.requiredParametersArray.length; i++) {
-		// 	console.log("i = "+ i + " out of " + this.requiredParametersArray.length);
-		// 	console.log("checking... " + this.requiredParametersArray[i]);
-		// 	// console.log("index = " + index);
-		// 	// console.log("length = " + this.requiredParametersArray.length);
-		// 	// if (!questionSpec.hasOwnProperty(para)) {
-		// 	// 	throw new Error("Question spec was missing \'"+para+"\' key");
-		// 	// }
-		// 	//
-		// 	// if (questionSpec[para]=="" || questionSpec[para]==null) {
-		// 	// 	throw new Error("Question spec was missing \'"+para+"\' value");
-		// 	// }
-		//
-		// 	this[eval(this.requiredParametersArray[i])] = questionSpec[this.requiredParametersArray[i]];
-		//
-		// }
-
-		// this.requiredParametersArray.forEach( function(para, index, arr) {
-		// 	if(this.isKeyValid(para,questionSpec)) {
-		// 		this[eval(para)] = questionSpec[para];
-		// 	}
-		//
-		//
-		// });
-
-		// this.label = questionSpec['label'];
-		// this.xmlName = questionSpec['xmlName'];
-		// this.required = questionSpec['required'];
-
-
-
+		// verify the questionSpec has the required general info and, if so assign to the generalInfo object.  If not, throw an error.
 		for(let key in this.generalInfo) {
 			if(this.generalInfo.hasOwnProperty(key)) {
-				console.log(key);
 				if (!questionSpec.hasOwnProperty(key)) {
 					throw new Error("Question spec was missing \'"+key+"\' key");
 				}
 				if (questionSpec[key]=="" || questionSpec[key]==null) {
 					throw new Error("Question spec was missing \'"+key+"\' value");
 				}
+				this.generalInfo[key]=questionSpec[key];
 			}
 		}
 
-
+		//todo subclasses, etc.
 	}
 
 
 
 	getLabel() :string {
-		return requiredInfo.label;
+		return this.generalInfo.label;
 	}
 
 	getXMLName() :string {
-		return requiredInfo.xmlName;
+		return this.generalInfo.xmlName;
 	}
 
 	isRequired() :boolean {
-		return requiredInfo.required;
+		return this.generalInfo.required;
 	}
 
 	getType() : string {
-		return this.type; //todo (sub-types classes and objects)
+		return this.generalInfo.type; //todo (sub-types classes and objects)
 
 	}
 

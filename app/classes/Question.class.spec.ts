@@ -87,7 +87,7 @@ describe('Question class tests', () => {
 			expect(q.getType()).toEqual('Number');
 		});
 
-		it("New Question object correct 'required' value", () => {
+		it("New Question object correct returns 'required' value", () => {
 			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
 			let q : Question = new Question(jsn);

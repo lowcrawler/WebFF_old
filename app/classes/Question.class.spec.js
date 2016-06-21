@@ -82,7 +82,7 @@ describe('Question class tests', function () {
             console.log(q.getType());
             expect(q.getType()).toEqual('Number');
         });
-        it("New Question object correct 'required' value", function () {
+        it("New Question object correct returns 'required' value", function () {
             var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
             var q = new Question_class_1.Question(jsn);
