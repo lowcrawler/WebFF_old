@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, Routes } from '@angular/router';
 import { EventsManagerComponent } from './eventsManager.component';
-import { NewEventComponent } from './newEvent.component';
+import { NewEventComponent } from './components/newEvent/newEvent.component';
 import { ViewEditEventComponent } from './viewEditEvent.component';
 import { HTTP_PROVIDERS } from '@angular/http';
 
