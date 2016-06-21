@@ -1,4 +1,4 @@
-export class Question {
+export class USGSQuestion {
 
 	// items common to all questions:
 	private generalInfo = {
@@ -26,10 +26,10 @@ export class Question {
 		for(let key in this.generalInfo) {
 			if(this.generalInfo.hasOwnProperty(key)) {
 				if (!questionSpec.hasOwnProperty(key)) {
-					throw new Error("Question spec was missing \'"+key+"\' key");
+					throw new Error("USGSQuestion spec was missing \'"+key+"\' key");
 				}
 				if (questionSpec[key]=="" || questionSpec[key]==null) {
-					throw new Error("Question spec was missing \'"+key+"\' value");
+					throw new Error("USGSQuestion spec was missing \'"+key+"\' value");
 				}
 				this.generalInfo[key]=questionSpec[key];
 			}

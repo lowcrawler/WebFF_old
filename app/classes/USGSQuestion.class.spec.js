@@ -1,6 +1,6 @@
 "use strict";
-var Question_class_1 = require('./Question.class');
-describe('Question class tests', function () {
+var USGSQuestion_class_1 = require('./USGSQuestion.class');
+describe('USGSQuestion class tests', function () {
     var numberQJSON = {
         "required": true,
         "label": "Station ID",
@@ -62,30 +62,30 @@ describe('Question class tests', function () {
     // must test "defaulValue" for all
     // must test "defaultValueOK" for all
     // must test secondary questions
-    describe('Question constructor tests', function () {
-        it("New Question object returns correct 'xmlName'", function () {
+    describe('USGSQuestion constructor tests', function () {
+        it("New USGSQuestion object returns correct 'xmlName'", function () {
             var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            var q = new Question_class_1.Question(jsn);
+            var q = new USGSQuestion_class_1.USGSQuestion(jsn);
             expect(q.getXMLName()).toEqual('stationID');
         });
-        it("New Question object returns correct 'label'", function () {
+        it("New USGSQuestion object returns correct 'label'", function () {
             var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            var q = new Question_class_1.Question(jsn);
+            var q = new USGSQuestion_class_1.USGSQuestion(jsn);
             expect(q.getLabel()).toEqual('Station ID');
         });
-        it("New Question object returns correct 'type'", function () {
+        it("New USGSQuestion object returns correct 'type'", function () {
             var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            var q = new Question_class_1.Question(jsn);
+            var q = new USGSQuestion_class_1.USGSQuestion(jsn);
             console.log(q.getType());
             expect(q.getType()).toEqual('Number');
         });
-        it("New Question object correct returns 'required' value", function () {
+        it("New USGSQuestion object correct returns 'required' value", function () {
             var str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            var q = new Question_class_1.Question(jsn);
+            var q = new USGSQuestion_class_1.USGSQuestion(jsn);
             expect(q.isRequired()).toEqual(true);
         });
         it("Constructor throws error when given JSON missing label key", function () {
@@ -93,21 +93,21 @@ describe('Question class tests', function () {
             delete missingLabelKeyJSON['label'];
             var str = JSON.stringify(missingLabelKeyJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            expect(function () { return new Question_class_1.Question(jsn); }).toThrow(new Error("Question spec was missing 'label' key"));
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(jsn); }).toThrow(new Error("USGSQuestion spec was missing 'label' key"));
         });
         it("Constructor throws error when given JSON missing xmlName value", function () {
             var blankLabelJSON = JSON.parse(JSON.stringify(numberQJSON));
             blankLabelJSON['xmlName'] = "";
             var str = JSON.stringify(blankLabelJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            expect(function () { return new Question_class_1.Question(jsn); }).toThrow(new Error("Question spec was missing 'xmlName' value"));
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(jsn); }).toThrow(new Error("USGSQuestion spec was missing 'xmlName' value"));
         });
         it("Constructor throws error when given JSON with null required value", function () {
             var nullValuelJSON = JSON.parse(JSON.stringify(numberQJSON));
             nullValuelJSON['required'] = null;
             var str = JSON.stringify(nullValuelJSON); //todo - this can't be the best way to do this....
             var jsn = JSON.parse(str);
-            expect(function () { return new Question_class_1.Question(jsn); }).toThrow(new Error("Question spec was missing 'required' value"));
+            expect(function () { return new USGSQuestion_class_1.USGSQuestion(jsn); }).toThrow(new Error("USGSQuestion spec was missing 'required' value"));
         });
     }); // end constructor tests
     // });
@@ -118,4 +118,4 @@ describe('Question class tests', function () {
     // 	expect(evt.getEventData()).toEqual(newJSON);
     // });
 });
-//# sourceMappingURL=Question.class.spec.js.map
+//# sourceMappingURL=USGSQuestion.class.spec.js.map

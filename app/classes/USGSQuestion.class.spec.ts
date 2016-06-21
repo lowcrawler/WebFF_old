@@ -1,5 +1,5 @@
-import { Question } from './Question.class';
-describe('Question class tests', () => {
+import { USGSQuestion } from './USGSQuestion.class';
+describe('USGSQuestion class tests', () => {
 	let numberQJSON = {
 		"required": true,
 		"label": "Station ID",
@@ -63,34 +63,34 @@ describe('Question class tests', () => {
 	// must test "defaultValueOK" for all
 	// must test secondary questions
 
-	describe('Question constructor tests', () => {
+	describe('USGSQuestion constructor tests', () => {
 
-		it("New Question object returns correct 'xmlName'", () => {
+		it("New USGSQuestion object returns correct 'xmlName'", () => {
 			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			let q : Question = new Question(jsn);
+			let q : USGSQuestion = new USGSQuestion(jsn);
 			expect(q.getXMLName()).toEqual('stationID');
 		});
 
-		it("New Question object returns correct 'label'", () => {
+		it("New USGSQuestion object returns correct 'label'", () => {
 			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			let q : Question = new Question(jsn);
+			let q : USGSQuestion = new USGSQuestion(jsn);
 			expect(q.getLabel()).toEqual('Station ID');
 		});
 
-		it("New Question object returns correct 'type'", () => {
+		it("New USGSQuestion object returns correct 'type'", () => {
 			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			let q : Question = new Question(jsn);
+			let q : USGSQuestion = new USGSQuestion(jsn);
 			console.log(q.getType());
 			expect(q.getType()).toEqual('Number');
 		});
 
-		it("New Question object correct returns 'required' value", () => {
+		it("New USGSQuestion object correct returns 'required' value", () => {
 			let str = JSON.stringify(numberQJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			let q : Question = new Question(jsn);
+			let q : USGSQuestion = new USGSQuestion(jsn);
 			expect(q.isRequired()).toEqual(true);
 		});
 
@@ -99,7 +99,7 @@ describe('Question class tests', () => {
 			delete missingLabelKeyJSON['label'];
 			let str = JSON.stringify(missingLabelKeyJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			expect( ()=> new Question(jsn) ).toThrow(new Error("Question spec was missing 'label' key"));
+			expect( ()=> new USGSQuestion(jsn) ).toThrow(new Error("USGSQuestion spec was missing 'label' key"));
 		});
 
 		it("Constructor throws error when given JSON missing xmlName value", ()=> {
@@ -107,7 +107,7 @@ describe('Question class tests', () => {
 			blankLabelJSON['xmlName'] = "";
 			let str = JSON.stringify(blankLabelJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			expect( ()=> new Question(jsn) ).toThrow(new Error("Question spec was missing 'xmlName' value"));
+			expect( ()=> new USGSQuestion(jsn) ).toThrow(new Error("USGSQuestion spec was missing 'xmlName' value"));
 		});
 
 		it("Constructor throws error when given JSON with null required value", ()=> {
@@ -115,7 +115,7 @@ describe('Question class tests', () => {
 			nullValuelJSON['required'] = null;
 			let str = JSON.stringify(nullValuelJSON); //todo - this can't be the best way to do this....
 			let jsn = JSON.parse(str);
-			expect( ()=> new Question(jsn) ).toThrow(new Error("Question spec was missing 'required' value"));
+			expect( ()=> new USGSQuestion(jsn) ).toThrow(new Error("USGSQuestion spec was missing 'required' value"));
 		});
 
 

@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var question_component_1 = require('app/components/question/question.component');
-var question_service_1 = require('app/services/question.service');
+var question_component_1 = require('../question/question.component');
+var question_service_1 = require('../../services/question.service');
 var NewEventComponent = (function () {
     function NewEventComponent(_questionService) {
         this._questionService = _questionService;
@@ -36,10 +36,9 @@ var NewEventComponent = (function () {
             directives: [question_component_1.QuestionComponent, common_1.FORM_DIRECTIVES],
             providers: [question_service_1.QuestionService]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof question_service_1.QuestionService !== 'undefined' && question_service_1.QuestionService) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [question_service_1.QuestionService])
     ], NewEventComponent);
     return NewEventComponent;
-    var _a;
 }());
 exports.NewEventComponent = NewEventComponent;
 //# sourceMappingURL=newEvent.component.js.map

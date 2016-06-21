@@ -1,7 +1,7 @@
-import { Component }       	from '@angular/core';
+import { Component, OnInit }       	from '@angular/core';
 import { FORM_DIRECTIVES } from '@angular/common';
-import { QuestionComponent }		from 'app/components/question/question.component';
-import { QuestionService }		from 'app/services/question.service';
+import { QuestionComponent }		from '../question/question.component';
+import { QuestionService }		from '../../services/question.service';
 
 @Component ({
 	selector:

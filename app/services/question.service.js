@@ -18,7 +18,7 @@ var QuestionService = (function () {
     // service provides interaction for pages that need/have questions.
     function QuestionService(_http) {
         this._http = _http;
-        this.eventsUrl = 'app/mocks/mock-questions.json'; // URL to web API that returns JSON array of events
+        this.questionsUrl = 'app/mocks/mock-questions.json'; // URL to web API that returns JSON array of events
     }
     QuestionService.prototype.getQuestions = function (key, value, matchFilter) {
         //TOOD Filter interface as parameters
@@ -46,15 +46,15 @@ var QuestionService = (function () {
         //TODO - mock/testing  and  live/DB option
         //TODO - fill out from local storage, then hit the DB and update....
         //TODO - gather up all events in LS and return
-        // get events from DB,
+        // get questions from DB,
         //TODO this should be a different observable, not just passed through, of course.
-        //TODO need to deal with something if this fails (one way to make fail is to change the eventsUrl)
+        //TODO need to deal with something if this fails (one way to make fail is to change the questionsUrl)
         return this.getHTTPQuestions();
         // TODO - add events from DB that were not in the LS and update
     };
     QuestionService.prototype.getHTTPQuestions = function () {
         //todo this should be any array of <t>events
-        return this._http.get(this.eventsUrl)
+        return this._http.get(this.questionsUrl)
             .map(function (response) { return response.json()['events']; })
             .catch(this.handleError);
     };
