@@ -2,18 +2,29 @@
 <h2>NEW EVENT</h2>
 New Sediment Event (more to come)
 <br>
-<!-- <div *ngFor="let question of pageQuestions">
-	<question [myQuestion]="question" [someText]="Hiya"></question>
-</div> -->
-<!-- <div *ngIf="!oneQuestion">
-	No oneQuestion here
+<!-- <form [FormGroup] = 'form' -->
+<div *ngFor="let question of pageQuestions; let i = index">
+	<div *ngIf="i==0">
+	{{i}}
+	<question [myQuestion]="question" ></question>
 </div>
-<div *ngIf="oneQuestion">
-	There is oneQuestion is the question:
-	 {{oneQuestion}} <br>
-</div> -->
+</div>
+<!-- /form> -->
 
-<question [(justText)]="testText"  [(justObj)]="testObj" [(myQuestion)]="singleQuestion"></question>
+<!-- <form [formGroup]="myForm">
+	<div *ngFor="let question of pageQuestions">
+		<question [myQuestion]="question" ></question>
+	</div>
+</form> -->
+
+<!-- <form [formGroup]="myForm">
+   <div formGroupName="name">
+     <input formControlName="first">
+     <input formControlName="last">
+   </div>
+</form>
+{{ myForm.value | json }} -->
+<!-- <question></question> -->
 
 <br><br>
 <filename>newEvent.component.html</filename>

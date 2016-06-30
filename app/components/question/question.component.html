@@ -1,37 +1,50 @@
 <div style="background-color:Thistle">
 <h4>Question:</h4>
 
-<div *ngIf="!justText">
-	no text passed
-</div>
-<div *ngIf="justText">
-	<b>Here is the passed Text:</b><br>
-	 {{justText}} <br>
-</div>
-<br>
-<
-<div *ngIf="!justObj">
-	no obj passed
-</div>
-<div *ngIf="justObj">
-	<b>Here is the passed JSON:</b><br>
-	 Foo: {{justObj.foo}} <br>
-	 Baz: {{justObj.baz}}
-</div>
 <br>
 <div class="question">
-	<i>I am a question spot</i>
 
 	<div *ngIf="!myQuestion">
-		Loading Question...
+		Question not found...
 	</div>
-	<div *ngIf="myQuestion">
-		<b>Here is the passed question:</b><br>
-		 {{myQuestion}} <br>
-	</div>
-</div>
 
-<button (click)="onClick()">Clickit</button>
+	<div *ngIf="myQuestion">
+
+		<form #f="ngForm"
+          (ngSubmit)="onSubmit(f.value)">
+
+        <label for="skuInput">{{myQuestion.getLabel()}}</label>
+        <input type="text"
+               id="skuInput"
+               placeholder="SKU"
+               ngControl="sku">
+
+      <button type="submit" class="ui button">Submit</button>
+    </form>
+
+
+<!--
+		<form formGroupName="gen">
+			<input type="radio" name="gender" value="male" checked> Male<br>
+		    <input type="radio" name="gender" value="female"> Female<br>
+		    <input type="radio" name="gender" value="other"> Other
+		</form> -->
+
+
+		<!-- <div formGroupName="name">
+  <input formControlName="first">
+  <input formControlName="last">
+</div> -->
+
+
+
+		<!-- <input type="radio" name="food" [(ngModel)]="food" value="one">
+		<input type="radio" name="food" [(ngModel)]="food" value="two"> -->
+		<!-- <b>Here is the passed question:</b><br>
+		 {{myQuestion}} <br> -->
+	</div> <!-- end if=myQuestion-->
+
+</div> <!-- end class=question-->
 
 
 <filename>question.component.html</filename>

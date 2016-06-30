@@ -7,23 +7,27 @@ import { USGSQuestion } from '../../classes/USGSQuestion.class';
 		'question',
 	templateUrl:
 		'./app/components/question/question.component.html',
-	directives: [FORM_DIRECTIVES],
+	directives: [FORM_DIRECTIVES]
 
 })
 
 
-export class QuestionComponent implements OnInit {
+export class QuestionComponent {
 
 	@Input() myQuestion:USGSQuestion
-	@Input() justText:string
-	@Input() justObj:object
 
 	 constructor() {
-
+		 console.log("QuestionComponent->constructor");
 	}
 
-	onClick() {
-		this.myQuestion.generalInfo.label = "changed";
-		console.log("change attempted");
+	ngOnInit() {
+		console.log("QuestionComponent->ngOnInit");
 	}
+
+	onSubmit(val) {
+		console.log("You submitted: " + val.sku + " at " + new Date().getTime());
+		console.log("blerg");
+	}
+
+
 }
